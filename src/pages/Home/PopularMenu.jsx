@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SectionHeader from "./../../components/SectionHeader";
 import MenuItem from "../../components/MenuItem";
+import { Link } from "react-router-dom";
 const PopularMenu = () => {
   const [menu, setMenu] = useState([]);
   useEffect(() => {
@@ -24,6 +25,9 @@ const PopularMenu = () => {
         {menu.map((menuItem) => (
           <MenuItem key={menuItem._id} menuItem={menuItem}></MenuItem>
         ))}
+      </div>
+      <div className="w-fit mx-auto mt-10">
+        <Link className="btn btn-outline text-[#1F2937] border-0 border-b-4 ">View Full Menu</Link>
       </div>
     </section>
   );

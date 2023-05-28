@@ -5,7 +5,7 @@ import moment from "moment";
 const Featured = () => {
   return (
     <section className="my-20 bg-fixed bg-center bg-cover bg-featured-img  text-white">
-      <div className="bg-black py-10 bg-opacity-60">
+      <div className="bg-black py-16 bg-opacity-60">
         <SectionHeader
           heading="Featured Menu"
           subHeading="Check it out"
