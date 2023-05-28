@@ -4,9 +4,11 @@ import NavigationBar from "../pages/Shared/NavigationBar/NavigationBar";
 
 const Main = () => {
   return (
-    <div>
-      <NavigationBar></NavigationBar>
-      <Outlet></Outlet>
+    <div className="min-h-screen flex flex-col justify-between">
+      <div>
+        <NavigationBar></NavigationBar>
+        <Outlet></Outlet>
+      </div>
       <Footer></Footer>
     </div>
   );

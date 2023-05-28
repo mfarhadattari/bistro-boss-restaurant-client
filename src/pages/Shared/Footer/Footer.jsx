@@ -3,7 +3,7 @@ import moment from "moment";
 
 const Footer = () => {
   return (
-    <footer className="w-full text-white">
+    <footer className="w-full text-white m-0">
       <div className="flex flex-col md:flex-row justify-center w-full  ">
         <div className="bg-[#1F2937] w-full p-14 text-center">
           <h2 className="text-3xl">CONTACT US</h2>
