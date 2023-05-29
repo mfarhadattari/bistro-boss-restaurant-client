@@ -7,6 +7,7 @@ import coverBg from "../../assets/shop/banner.jpg";
 import { useState } from "react";
 import CategoryTab from "./CategoryTab";
 import useMenu from "./../../hooks/useMenu";
+import Loader from "./../../components/Loader";
 
 const Shop = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -29,46 +30,50 @@ const Shop = () => {
         bgOpacity={60}
       ></Cover>
       <section className="my-20 md:w-3/4 mx-auto">
-        <Tabs
-          selectedIndex={tabIndex}
-          onSelect={(index) => setTabIndex(index)}
-          className="text-center text-2xl font-bold"
-          selectedTabClassName="text-[#BB8506] border-[#BB8506] border-b-4 outline-0"
-        >
-          <TabList className="border-0 flex gap-5 justify-center">
-            <Tab className="border-0 uppercase">
-              <button className="uppercase">Salad</button>
-            </Tab>
-            <Tab className="border-0">
-              <button className="uppercase">Pizza</button>
-            </Tab>
-            <Tab className="border-0">
-              <button className="uppercase">Dessert</button>
-            </Tab>
-            <Tab className="border-0">
-              <button className="uppercase">Soup</button>
-            </Tab>
-            <Tab className="border-0">
-              <button className="uppercase">Drink</button>
-            </Tab>
-          </TabList>
+        {loading ? (
+          <Loader></Loader>
+        ) : (
+          <Tabs
+            selectedIndex={tabIndex}
+            onSelect={(index) => setTabIndex(index)}
+            className="text-center text-2xl font-bold"
+            selectedTabClassName="text-[#BB8506] border-[#BB8506] border-b-4 outline-0"
+          >
+            <TabList className="border-0 flex gap-5 justify-center">
+              <Tab className="border-0 uppercase">
+                <button className="uppercase">Salad</button>
+              </Tab>
+              <Tab className="border-0">
+                <button className="uppercase">Pizza</button>
+              </Tab>
+              <Tab className="border-0">
+                <button className="uppercase">Dessert</button>
+              </Tab>
+              <Tab className="border-0">
+                <button className="uppercase">Soup</button>
+              </Tab>
+              <Tab className="border-0">
+                <button className="uppercase">Drink</button>
+              </Tab>
+            </TabList>
 
-          <TabPanel>
-            <CategoryTab items={salads}></CategoryTab>
-          </TabPanel>
-          <TabPanel>
-            <CategoryTab items={pizzas}></CategoryTab>
-          </TabPanel>
-          <TabPanel>
-            <CategoryTab items={desserts}></CategoryTab>
-          </TabPanel>
-          <TabPanel>
-            <CategoryTab items={soups}></CategoryTab>
-          </TabPanel>
-          <TabPanel>
-            <CategoryTab items={drinks}></CategoryTab>
-          </TabPanel>
-        </Tabs>
+            <TabPanel>
+              <CategoryTab items={salads}></CategoryTab>
+            </TabPanel>
+            <TabPanel>
+              <CategoryTab items={pizzas}></CategoryTab>
+            </TabPanel>
+            <TabPanel>
+              <CategoryTab items={desserts}></CategoryTab>
+            </TabPanel>
+            <TabPanel>
+              <CategoryTab items={soups}></CategoryTab>
+            </TabPanel>
+            <TabPanel>
+              <CategoryTab items={drinks}></CategoryTab>
+            </TabPanel>
+          </Tabs>
+        )}
       </section>
     </main>
   );
