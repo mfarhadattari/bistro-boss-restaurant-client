@@ -1,13 +1,11 @@
 import { FaBars } from "react-icons/fa";
+import NavigationLink from "./NavigationLink";
 
 const NavigationBar = () => {
   const navOptions = (
     <>
-      <li>HOME</li>
-      <li>HOME</li>
-      <li>HOME</li>
-      <li>HOME</li>
-      <li>HOME</li>
+      <NavigationLink to="/">Home</NavigationLink>
+      <NavigationLink to="/menu">Menu</NavigationLink>
     </>
   );
   return (
@@ -30,7 +28,7 @@ const NavigationBar = () => {
         </div>
       </div>
       <div className="navbar-end hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-5">{navOptions}</ul>
+        <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
     </nav>
   );
