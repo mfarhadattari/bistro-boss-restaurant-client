@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MenuBtn from "../../components/Buttons/MenuBtn";
 import MenuItem from "../../components/MenuItem";
 import Cover from "../../components/cover";
@@ -21,7 +22,9 @@ const MenuCategory = ({ menuItems, bgImg, heading, subheading }) => {
         ))}
       </div>
       <div className="w-fit mx-auto mt-10">
-        <MenuBtn>Order Your Favorite Food</MenuBtn>
+        <Link to={`/shop`}>
+          <MenuBtn>Order Your Favorite Food</MenuBtn>
+        </Link>
       </div>
     </section>
   );
