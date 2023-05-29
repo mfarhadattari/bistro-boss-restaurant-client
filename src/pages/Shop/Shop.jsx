@@ -5,9 +5,18 @@ import Cover from "../../components/cover";
 import SetTitle from "./../../components/SetTitle";
 import coverBg from "../../assets/shop/banner.jpg";
 import { useState } from "react";
+import CategoryTab from "./CategoryTab";
+import useMenu from "./../../hooks/useMenu";
 
 const Shop = () => {
   const [tabIndex, setTabIndex] = useState(0);
+  const { menu, loading } = useMenu();
+  const drinks = menu.filter((menuItem) => menuItem.category === "drinks");
+  const desserts = menu.filter((menuItem) => menuItem.category === "dessert");
+  const pizzas = menu.filter((menuItem) => menuItem.category === "pizza");
+  const salads = menu.filter((menuItem) => menuItem.category === "salad");
+  const soups = menu.filter((menuItem) => menuItem.category === "soup");
+
   return (
     <main>
       <SetTitle title="Shop - Bistro Boos Restaurant"></SetTitle>
@@ -44,11 +53,21 @@ const Shop = () => {
             </Tab>
           </TabList>
 
-          <TabPanel></TabPanel>
-          <TabPanel></TabPanel>
-          <TabPanel></TabPanel>
-          <TabPanel></TabPanel>
-          <TabPanel></TabPanel>
+          <TabPanel>
+            <CategoryTab items={salads}></CategoryTab>
+          </TabPanel>
+          <TabPanel>
+            <CategoryTab items={pizzas}></CategoryTab>
+          </TabPanel>
+          <TabPanel>
+            <CategoryTab items={desserts}></CategoryTab>
+          </TabPanel>
+          <TabPanel>
+            <CategoryTab items={soups}></CategoryTab>
+          </TabPanel>
+          <TabPanel>
+            <CategoryTab items={drinks}></CategoryTab>
+          </TabPanel>
         </Tabs>
       </section>
     </main>
