@@ -28,19 +28,19 @@ const Shop = () => {
         >
           <TabList className="border-0 flex gap-5 justify-center">
             <Tab className="border-0 uppercase">
-              Salad
+              <button className="uppercase">Salad</button>
             </Tab>
-            <Tab className="border-0 uppercase">
-              Pizza
+            <Tab className="border-0">
+              <button className="uppercase">Pizza</button>
             </Tab>
-            <Tab className="border-0 uppercase">
-              Dessert
+            <Tab className="border-0">
+              <button className="uppercase">Dessert</button>
             </Tab>
-            <Tab className="border-0 uppercase">
-              Soup
+            <Tab className="border-0">
+              <button className="uppercase">Soup</button>
             </Tab>
-            <Tab className="border-0 uppercase">
-              Drink
+            <Tab className="border-0">
+              <button className="uppercase">Drink</button>
             </Tab>
           </TabList>
 
