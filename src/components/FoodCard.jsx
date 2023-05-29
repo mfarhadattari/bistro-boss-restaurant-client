@@ -1,4 +1,4 @@
-import PrimaryBtn from "./Buttons/PrimaryBtn";
+import AddToCartBtn from "./Buttons/AddToCartBtn";
 
 const FoodCard = ({ item }) => {
   const { image, name, price, recipe } = item;
@@ -16,7 +16,7 @@ const FoodCard = ({ item }) => {
       <div className="card-body">
         <h2 className="card-title w-fit mx-auto">{name}</h2>
         <p className="text-lg font-normal text-left text-[#737373]">{recipe}</p>
-        <PrimaryBtn>Add To Cart</PrimaryBtn>
+        <AddToCartBtn>Add To Cart</AddToCartBtn>
       </div>
     </div>
   );
