@@ -7,6 +7,7 @@ const NavigationBar = () => {
       <NavigationLink to="/">Home</NavigationLink>
       <NavigationLink to="/menu">Menu</NavigationLink>
       <NavigationLink to="/shop">Shop</NavigationLink>
+      <NavigationLink to="/login">Login</NavigationLink>
     </>
   );
   return (

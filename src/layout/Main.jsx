@@ -1,15 +1,19 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../pages/Shared/Footer/Footer";
 import NavigationBar from "../pages/Shared/NavigationBar/NavigationBar";
 
 const Main = () => {
+  const location = useLocation();
+  const noHeaderFooter =
+    location.pathname === "/login" || location.pathname === "/register";
+
   return (
     <div className="min-h-screen flex flex-col justify-between">
       <div>
-        <NavigationBar></NavigationBar>
+        {noHeaderFooter || <NavigationBar></NavigationBar>}
         <Outlet></Outlet>
       </div>
-      <Footer></Footer>
+      {noHeaderFooter || <Footer></Footer>}
     </div>
   );
 };
