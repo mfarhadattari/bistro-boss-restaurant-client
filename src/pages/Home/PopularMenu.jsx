@@ -1,20 +1,9 @@
-import { useEffect, useState } from "react";
 import SectionHeader from "./../../components/SectionHeader";
 import MenuItem from "../../components/MenuItem";
 import { Link } from "react-router-dom";
+import useMenu from "./../../hooks/useMenu";
 const PopularMenu = () => {
-  const [menu, setMenu] = useState([]);
-  useEffect(() => {
-    fetch("menu.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const popularMenu = data.filter(
-          (menuItem) => menuItem.category === "popular"
-        );
-        setMenu(popularMenu);
-      });
-  }, []);
-
+  const [menu] = useMenu("popular");
   return (
     <section className="my-20">
       <SectionHeader
@@ -27,7 +16,9 @@ const PopularMenu = () => {
         ))}
       </div>
       <div className="w-fit mx-auto mt-10">
-        <Link className="btn btn-outline text-[#1F2937] border-0 border-b-4 ">View Full Menu</Link>
+        <Link className="btn btn-outline text-[#1F2937] border-0 border-b-4 ">
+          View Full Menu
+        </Link>
       </div>
     </section>
   );
