@@ -8,6 +8,7 @@ import Register from "../pages/User/Register";
 import Dashboard from "../layout/Dashboard";
 import UserHome from "../pages/User/Dashboard/UserHome";
 import Carts from "../pages/User/Dashboard/Carts";
+import RouteProtector from "./RouteProtector";
 
 const Routes = createBrowserRouter([
   {
@@ -38,7 +39,11 @@ const Routes = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <RouteProtector>
+        <Dashboard></Dashboard>
+      </RouteProtector>
+    ),
     children: [
       {
         path: "/dashboard/",

@@ -6,6 +6,8 @@ const CartItem = ({ cartItem, no }) => {
   const { refetchCart } = useCart();
   const { _id, name, price, quantity, image } = cartItem;
 
+  /* ---------------------------------------------------------------
+  !-------------------------- DELETE ITEM HANDLER ------------- */
   const deleteItem = (id) => {
     Swal.fire({
       icon: "question",

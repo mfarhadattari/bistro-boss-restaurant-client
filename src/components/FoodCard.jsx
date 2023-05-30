@@ -3,14 +3,35 @@ import AddToCartBtn from "./Buttons/AddToCartBtn";
 import { AuthContext } from "./../providers/AuthProvider";
 import Swal from "sweetalert2";
 import useCart from "../hooks/useCart";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const FoodCard = ({ item }) => {
   const { user } = useContext(AuthContext);
   const { image, name, price, recipe } = item;
   const { refetchCart } = useCart();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handelAddToCart = (menuItem) => {
     const { image, name, price, _id } = menuItem;
+    if (!user) {
+      Swal.fire({
+        icon: "warning",
+        title: "Please Login for add food!",
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Ok",
+        cancelButtonText: "No",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          navigate("/login", {
+            state: { from: location.pathname },
+            replace: true,
+          });
+        }
+      });
+    }
     if (user && user.email) {
       const cartItem = {
         foodID: _id,
