@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import img from "../../assets/others/authentication.png";
 import {
   loadCaptchaEnginge,
@@ -17,6 +17,12 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
   const [loginDisabled, setLoginDisabled] = useState(true);
+
+  /* -----------------------------------------------------------
+  !---------------------- Redirect -------------------- */
+  const location = useLocation();
+  const from = location.state?.from || "/";
+  const navigate = useNavigate();
 
   /* -----------------------------------------------------------
   !----------------- GENERATE CAPTCHA -------------- */
@@ -56,6 +62,8 @@ const Login = () => {
           icon: "success",
           text: "Successfully Login",
           confirmButtonColor: "green",
+        }).then(() => {
+          navigate(from, { replace: true });
         });
       })
       .catch((error) => {

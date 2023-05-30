@@ -5,6 +5,7 @@ import Menu from "../pages/Menu/Menu";
 import Shop from "../pages/Shop/Shop";
 import Login from "../pages/User/Login";
 import Register from "../pages/User/Register";
+import RouteProtector from "./RouteProtector";
 
 const Routes = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ const Routes = createBrowserRouter([
       {
         path: "register",
         element: <Register></Register>,
+      },
+      {
+        path: "secret",
+        element: (
+          <RouteProtector>
+            <div className="my-40 text-center text-5xl">This Is Secret</div>
+          </RouteProtector>
+        ),
       },
     ],
   },
