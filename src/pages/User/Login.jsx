@@ -6,15 +6,27 @@ import {
   LoadCanvasTemplate,
 } from "react-simple-captcha";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SetTitle from "../../components/SetTitle";
+import LoadingBtn from "./../../components/Buttons/LoadingBtn";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { loginUser } = useContext(AuthContext);
+
+  const [loading, setLoading] = useState(false);
   const [loginDisabled, setLoginDisabled] = useState(true);
+
+  /* -----------------------------------------------------------
+  !----------------- GENERATE CAPTCHA -------------- */
   useEffect(() => {
     loadCaptchaEnginge(6);
+    setLoginDisabled(true);
   }, []);
 
+  /* --------------------------------------------------------
+  !------------------ CAPTCHA VERIFY HANDEL ------------------ */
   const handelCaptcha = (event) => {
     const captcha = event.target.value;
     if (validateCaptcha(captcha, false)) {
@@ -22,6 +34,41 @@ const Login = () => {
     } else {
       setLoginDisabled(true);
     }
+  };
+
+  /* ----------------------------------------------------------------------
+  !----------------- FORM SUBMIT HANDEL -------------------------- */
+  const handelLoginSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true);
+
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    loginUser(email, password)
+      .then(() => {
+        setLoading(false);
+        form.reset();
+        Swal.fire({
+          title: "Success",
+          icon: "success",
+          text: "Successfully Login",
+          confirmButtonColor: "green",
+        });
+      })
+      .catch((error) => {
+        setLoading(false);
+        Swal.fire({
+          title: "Error",
+          icon: "error",
+          confirmButtonColor: "red",
+          html: `
+            <p class="capitalize">
+              ${error.message.split("/")[1].slice(0, -2).split("-").join(" ")}
+            </p>`,
+        });
+      });
   };
 
   return (
@@ -36,7 +83,7 @@ const Login = () => {
           <h1 className="text-center text-[#151515] text-4xl font-semibold">
             Login
           </h1>
-          <form className="card-body">
+          <form className="card-body" onSubmit={handelLoginSubmit}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-[#444444] text-xl font-medium">
@@ -45,6 +92,8 @@ const Login = () => {
               </label>
               <input
                 type="email"
+                name="email"
+                required
                 placeholder="Type Here"
                 className="input input-bordered"
               />
@@ -58,6 +107,8 @@ const Login = () => {
               </label>
               <input
                 type="password"
+                name="password"
+                required
                 placeholder="Enter Your Password"
                 className="input input-bordered"
               />
@@ -79,12 +130,13 @@ const Login = () => {
             </div>
 
             <div className="form-control mt-6">
-              <button
+              <LoadingBtn
+                loading={loading}
                 className="btn bg-[#D1A054] border-0"
                 disabled={loginDisabled}
               >
                 Login
-              </button>
+              </LoadingBtn>
             </div>
             <p className="text-[#D1A054] text-center mt-5">
               New here?{" "}

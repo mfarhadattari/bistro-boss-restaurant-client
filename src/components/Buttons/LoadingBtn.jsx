@@ -1,8 +1,12 @@
 import { Oval } from "react-loader-spinner";
 
-const LoadingBtn = ({ children, type, className, loading }) => {
+const LoadingBtn = ({ children, type, className, loading, disabled }) => {
   return (
-    <button type={type} className={`${className} flex gap-2 items-center`}>
+    <button
+      type={type}
+      className={`${className} flex gap-2 items-center`}
+      disabled={disabled}
+    >
       {loading && (
         <Oval
           height={20}

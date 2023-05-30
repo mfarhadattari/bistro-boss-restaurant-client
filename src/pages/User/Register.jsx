@@ -43,7 +43,6 @@ const Register = () => {
         });
       })
       .catch((error) => {
-        console.log(error.message);
         setLoading(false);
         Swal.fire({
           title: "Error",
