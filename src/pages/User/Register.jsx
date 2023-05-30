@@ -3,15 +3,37 @@ import img from "../../assets/others/authentication.png";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../components/Message/ErrorMessage";
 import SetTitle from "../../components/SetTitle";
+import { useContext, useState } from "react";
+import { AuthContext } from "./../../providers/AuthProvider";
+import LoadingBtn from "../../components/Buttons/LoadingBtn";
+
 const Register = () => {
+  //! AuthContext
+  const { createUser, logoutUser } = useContext(AuthContext);
+
+  const [loading, setLoading] = useState(false);
+
+  //! react hook form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  /* --------------------------------------------------------------
+  ! ------------------------- Sign Up Handler ------------------ */
   const onSubmit = (data) => {
+    setLoading(true);
     console.log(data);
+    createUser(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setLoading(false);
+      });
   };
 
   return (
@@ -95,7 +117,9 @@ const Register = () => {
             </div>
 
             <div className="form-control mt-6">
-              <button className="btn bg-[#D1A054] border-0">Sign Up</button>
+              <LoadingBtn type="submit" className="btn bg-[#D1A054] border-0" loading={loading}>
+                Sign Up
+              </LoadingBtn>
             </div>
             <p className="text-[#D1A054] text-center mt-5">
               Already registered?{" "}
