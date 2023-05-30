@@ -5,7 +5,7 @@ const NavigationLink = ({ to, children }) => {
     <li className="text-xl font-medium">
       <NavLink
         to={to}
-        className={({ isActive }) => (isActive ? "underline underline-offset-4" : "")}
+        className={({ isActive }) => (isActive ? "text-[#EEFF25]" : "")}
       >
         {children}
       </NavLink>
