@@ -5,7 +5,9 @@ import Menu from "../pages/Menu/Menu";
 import Shop from "../pages/Shop/Shop";
 import Login from "../pages/User/Login";
 import Register from "../pages/User/Register";
-import RouteProtector from "./RouteProtector";
+import Dashboard from "../layout/Dashboard";
+import UserHome from "../pages/User/Dashboard/UserHome";
+import Carts from "../pages/User/Dashboard/Carts";
 
 const Routes = createBrowserRouter([
   {
@@ -32,13 +34,19 @@ const Routes = createBrowserRouter([
         path: "register",
         element: <Register></Register>,
       },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
       {
-        path: "secret",
-        element: (
-          <RouteProtector>
-            <div className="my-40 text-center text-5xl">This Is Secret</div>
-          </RouteProtector>
-        ),
+        path: "/dashboard/",
+        element: <UserHome></UserHome>,
+      },
+      {
+        path: "my-cart",
+        element: <Carts></Carts>,
       },
     ],
   },

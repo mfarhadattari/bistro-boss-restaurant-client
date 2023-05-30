@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
-import Footer from "../pages/Shared/Footer/Footer";
-import NavigationBar from "../pages/Shared/NavigationBar/NavigationBar";
+import NavigationBar from "../pages/Shared/NavigationBar";
+import Footer from "../pages/Shared/Footer";
 
 const Main = () => {
   const location = useLocation();
