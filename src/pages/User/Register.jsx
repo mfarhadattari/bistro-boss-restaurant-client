@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img from "../../assets/others/authentication.png";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../components/Message/ErrorMessage";
@@ -6,12 +6,15 @@ import SetTitle from "../../components/SetTitle";
 import { useContext, useState } from "react";
 import { AuthContext } from "./../../providers/AuthProvider";
 import LoadingBtn from "../../components/Buttons/LoadingBtn";
+import Swal from "sweetalert2";
 
 const Register = () => {
   //! AuthContext
   const { createUser, logoutUser } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   //! react hook form
   const {
@@ -24,15 +27,33 @@ const Register = () => {
   ! ------------------------- Sign Up Handler ------------------ */
   const onSubmit = (data) => {
     setLoading(true);
-    console.log(data);
     createUser(data.email, data.password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         setLoading(false);
+        Swal.fire({
+          title: "Success",
+          icon: "success",
+          text: "Successfully Register! Please Login",
+          showConfirmButton: true,
+          confirmButtonColor: "green",
+          confirmButtonText: "Ok",
+        }).then(() => {
+          logoutUser();
+          navigate("/login");
+        });
       })
       .catch((error) => {
-        console.error(error.message);
+        console.log(error.message);
         setLoading(false);
+        Swal.fire({
+          title: "Error",
+          icon: "error",
+          confirmButtonColor: "red",
+          html: `
+            <p class="capitalize">
+              ${error.message.split("/")[1].slice(0, -2).split("-").join(" ")}
+            </p>`,
+        });
       });
   };
 
@@ -117,7 +138,11 @@ const Register = () => {
             </div>
 
             <div className="form-control mt-6">
-              <LoadingBtn type="submit" className="btn bg-[#D1A054] border-0" loading={loading}>
+              <LoadingBtn
+                type="submit"
+                className="btn bg-[#D1A054] border-0"
+                loading={loading}
+              >
                 Sign Up
               </LoadingBtn>
             </div>
