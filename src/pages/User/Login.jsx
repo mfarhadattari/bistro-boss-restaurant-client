@@ -49,6 +49,7 @@ const Login = () => {
     loginUser(email, password)
       .then(() => {
         setLoading(false);
+        setLoginDisabled(true);
         form.reset();
         Swal.fire({
           title: "Success",
