@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import img from "../../assets/others/authentication.png";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../components/Message/ErrorMessage";
+import SetTitle from "../../components/SetTitle";
 const Register = () => {
   const {
     register,
@@ -15,6 +16,7 @@ const Register = () => {
 
   return (
     <section className="hero min-h-screen bg-authentication-img p-10">
+      <SetTitle title="Register - Bistro Boos Restaurant"></SetTitle>
       <div className="w-[800px] hero-content flex-col lg:flex-row-reverse bg-authentication-img shadow-login py-5">
         <div className="text-center w-full">
           <img src={img} alt="" className="w-full" />

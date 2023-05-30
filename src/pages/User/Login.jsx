@@ -7,6 +7,7 @@ import {
 } from "react-simple-captcha";
 
 import { useEffect, useState } from "react";
+import SetTitle from "../../components/SetTitle";
 
 const Login = () => {
   const [loginDisabled, setLoginDisabled] = useState(true);
@@ -25,6 +26,8 @@ const Login = () => {
 
   return (
     <section className="hero min-h-screen bg-authentication-img p-10">
+      <SetTitle title="Login - Bistro Boos Restaurant"></SetTitle>
+
       <div className="hero-content flex-col lg:flex-row bg-authentication-img shadow-login py-5">
         <div className="text-center lg:text-left w-full">
           <img src={img} alt="" />
@@ -84,7 +87,10 @@ const Login = () => {
               </button>
             </div>
             <p className="text-[#D1A054] text-center mt-5">
-              New here? <Link className="underline underline-offset-4" to="/register">Create an account</Link>
+              New here?{" "}
+              <Link className="underline underline-offset-4" to="/register">
+                Create an account
+              </Link>
             </p>
           </form>
         </div>
