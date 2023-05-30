@@ -1,10 +1,34 @@
 import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
+import useCart from "../hooks/useCart";
 
 const CartItem = ({ cartItem, no }) => {
+  const { refetchCart } = useCart();
   const { _id, name, price, quantity, image } = cartItem;
 
   const deleteItem = (id) => {
-    console.log(id);
+    Swal.fire({
+      icon: "question",
+      title: "Want to remove?",
+      showConfirmButton: true,
+      confirmButtonText: "Yes",
+      confirmButtonColor: "red",
+      showCancelButton: true,
+      cancelButtonColor: "Green",
+      cancelButtonText: "No",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        fetch(`http://localhost:5000/carts/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              refetchCart();
+            }
+          });
+      }
+    });
   };
 
   return (
