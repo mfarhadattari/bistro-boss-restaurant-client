@@ -28,6 +28,7 @@ const Shop = () => {
         textBg="black"
         textColor="white"
         bgOpacity={60}
+        height="700px"
       ></Cover>
       <section className="my-20 md:w-3/4 mx-auto">
         {loading ? (

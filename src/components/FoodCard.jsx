@@ -2,10 +2,12 @@ import { useContext } from "react";
 import AddToCartBtn from "./Buttons/AddToCartBtn";
 import { AuthContext } from "./../providers/AuthProvider";
 import Swal from "sweetalert2";
+import useCart from "../hooks/useCart";
 
 const FoodCard = ({ item }) => {
   const { user } = useContext(AuthContext);
   const { image, name, price, recipe } = item;
+  const { refetchCart } = useCart();
 
   const handelAddToCart = (menuItem) => {
     const { image, name, price, _id } = menuItem;
@@ -26,6 +28,7 @@ const FoodCard = ({ item }) => {
       })
         .then((res) => res.json())
         .then((data) => {
+          refetchCart();
           if (data.insertedId || data.modifiedCount > 0) {
             Swal.fire({
               icon: "success",

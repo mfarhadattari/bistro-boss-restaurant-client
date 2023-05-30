@@ -7,10 +7,11 @@ const Cover = ({
   textBg,
   textColor,
   bgOpacity,
+  height,
 }) => {
   return (
     <Parallax blur={{ min: -15, max: 15 }} bgImage={bgImg} strength={-200}>
-      <div className="hero h-[600px]">
+      <div className={`hero h-[${height}] `}>
         <div className="hero-overlay bg-opacity-20"></div>
         <div
           className={`hero-content text-center text-neutral-content bg-${textBg} bg-opacity-${bgOpacity} text-${textColor} md:w-3/4 mx-auto py-32`}

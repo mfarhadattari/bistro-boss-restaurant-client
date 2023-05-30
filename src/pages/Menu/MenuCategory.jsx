@@ -14,6 +14,7 @@ const MenuCategory = ({ menuItems, bgImg, heading, subheading }) => {
           textBg="black"
           bgOpacity={60}
           textColor="white"
+          height="600px"
         ></Cover>
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">

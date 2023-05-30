@@ -21,6 +21,7 @@ const Home = () => {
         subheading="Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, libero accusamus laborum deserunt ratione dolor officiis praesentium! Deserunt magni aperiam dolor eius dolore at, nihil iusto ducimus incidunt quibusdam nemo."
         textBg="white"
         textColor="black"
+        height="600px"
       ></Cover>
       <Contract></Contract>
       <Featured></Featured>
