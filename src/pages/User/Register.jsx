@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 
 const Register = () => {
   //! AuthContext
-  const { createUser, logoutUser } = useContext(AuthContext);
+  const { createUser, logoutUser, updateUserInfo } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
 
@@ -29,6 +29,7 @@ const Register = () => {
     setLoading(true);
     createUser(data.email, data.password)
       .then(() => {
+        updateUserInfo(data.name, data.photoURL);
         setLoading(false);
         Swal.fire({
           title: "Success",
@@ -80,6 +81,23 @@ const Register = () => {
                 name="name"
                 className="input input-bordered"
                 {...register("name", { required: true })}
+              />
+              {errors.name && (
+                <ErrorMessage message="Name is required"></ErrorMessage>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-[#444444] text-xl font-medium">
+                  Photo URL
+                </span>
+              </label>
+              <input
+                type="url"
+                placeholder="Enter Photo URL"
+                name="photoURL"
+                className="input input-bordered"
+                {...register("photoURL", { required: true })}
               />
               {errors.name && (
                 <ErrorMessage message="Name is required"></ErrorMessage>
