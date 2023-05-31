@@ -65,7 +65,6 @@ const AuthProvider = ({ children }) => {
             email: currentUser.email,
           })
           .then((res) => {
-            console.log(res.data);
             if (res.data.token) {
               localStorage.setItem("bistro-boss-token", res.data.token);
             }

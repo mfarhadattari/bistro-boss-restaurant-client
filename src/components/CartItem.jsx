@@ -46,6 +46,7 @@ const CartItem = ({ cartItem, no }) => {
         </div>
       </td>
       <td className="text-center">{name}</td>
+      {/* to do : Update Quantity*/}
       <td className="text-center">
         <p>Price: ${price}</p>
         <div className="flex gap-2 items-center justify-center mt-2">
