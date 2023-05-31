@@ -6,9 +6,10 @@ import Shop from "../pages/Shop/Shop";
 import Login from "../pages/User/Login";
 import Register from "../pages/User/Register";
 import Dashboard from "../layout/Dashboard";
-import UserHome from "../pages/User/Dashboard/UserHome";
-import Carts from "../pages/User/Dashboard/Carts";
 import RouteProtector from "./RouteProtector";
+import UserHome from "../pages/Dashboard/User/UserHome";
+import Carts from "../pages/Dashboard/User/Carts";
+import AllUsers from "../pages/Dashboard/Admin/AllUsers";
 
 const Routes = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const Routes = createBrowserRouter([
       {
         path: "my-cart",
         element: <Carts></Carts>,
+      },
+      {
+        path: "all-users",
+        element: <AllUsers></AllUsers>,
       },
     ],
   },

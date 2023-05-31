@@ -1,4 +1,5 @@
-import SetTitle from "./../../../components/SetTitle";
+import SetTitle from "../../../components/SetTitle";
+
 const UserHome = () => {
   return (
     <main>

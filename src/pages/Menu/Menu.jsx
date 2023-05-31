@@ -39,7 +39,6 @@ const Menu = () => {
               textBg="black"
               textColor="white"
               bgOpacity={60}
-              height="700px"
             ></Cover>
             <SectionHeader
               heading="TODAY'S OFFER"

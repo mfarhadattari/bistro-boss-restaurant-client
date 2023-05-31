@@ -1,7 +1,7 @@
-import CartItem from "../../../components/CartItem";
+import SectionHeader from "../../../components/SectionHeader";
 import SetTitle from "../../../components/SetTitle";
-import SectionHeader from "./../../../components/SectionHeader";
-import useCart from "./../../../hooks/useCart";
+import CartItem from "../../../components/CartItem";
+import useCart from "../../../hooks/useCart";
 
 const Carts = () => {
   const { carts } = useCart();
@@ -38,15 +38,27 @@ const Carts = () => {
                 <th className="bg-[#D1A054] text-white text-lg text-center">
                   <label>#</label>
                 </th>
-                <th className="bg-[#D1A054] text-white text-lg text-center">ITEM IMAGE</th>
-                <th className="bg-[#D1A054] text-white text-lg text-center">ITEM NAME</th>
-                <th className="bg-[#D1A054] text-white text-lg text-center">PRICE & QUANTITY</th>
-                <th className="bg-[#D1A054] text-white text-lg text-center">ACTION</th>
+                <th className="bg-[#D1A054] text-white text-lg text-center">
+                  ITEM IMAGE
+                </th>
+                <th className="bg-[#D1A054] text-white text-lg text-center">
+                  ITEM NAME
+                </th>
+                <th className="bg-[#D1A054] text-white text-lg text-center">
+                  PRICE & QUANTITY
+                </th>
+                <th className="bg-[#D1A054] text-white text-lg text-center">
+                  ACTION
+                </th>
               </tr>
             </thead>
             <tbody>
-              {carts.map((cartItem , index) => (
-                <CartItem key={cartItem._id} no={index} cartItem={cartItem}></CartItem>
+              {carts.map((cartItem, index) => (
+                <CartItem
+                  key={cartItem._id}
+                  no={index}
+                  cartItem={cartItem}
+                ></CartItem>
               ))}
             </tbody>
           </table>

@@ -2,9 +2,13 @@ import { Outlet } from "react-router-dom";
 import NavigationLink from "./../components/NavigationLink";
 import {
   FaBars,
+  FaBook,
   FaCalendar,
   FaHome,
+  FaIndent,
   FaShoppingBag,
+  FaUsers,
+  FaUtensils,
   FaWallet,
 } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
@@ -13,7 +17,10 @@ import { FaCommentDots } from "react-icons/fa";
 import Heading from "../components/Heading";
 
 const Dashboard = () => {
-  const slideBarOptions = (
+  // TODO: DYNAMICALLY GET IS ADMIN
+  const isAdmin = true;
+
+  const userOption = (
     <>
       <NavigationLink to="/dashboard/">
         <span className="flex items-center gap-2 text-lg">
@@ -45,9 +52,41 @@ const Dashboard = () => {
           <FaCalendarCheck></FaCalendarCheck> MY BOOKING
         </span>
       </NavigationLink>
+    </>
+  );
 
-      <div className="divider after:bg-white before:bg-white"></div>
+  const adminOption = (
+    <>
+      <NavigationLink to="/dashboard/">
+        <span className="flex items-center gap-2 text-lg">
+          <FaHome></FaHome> ADMIN HOME
+        </span>
+      </NavigationLink>
+      <NavigationLink to="add-item">
+        <span className="flex items-center gap-2 text-lg">
+          <FaUtensils></FaUtensils> ADD ITEM
+        </span>
+      </NavigationLink>
+      <NavigationLink to="manage-items">
+        <span className="flex items-center gap-2 text-lg">
+          <FaIndent></FaIndent> MANAGE ITEMS
+        </span>
+      </NavigationLink>
+      <NavigationLink to="manage-bookings">
+        <span className="flex items-center gap-2">
+          <FaBook></FaBook> MANAGE BOOKINGS
+        </span>
+      </NavigationLink>
+      <NavigationLink to="all-users">
+        <span className="flex items-center gap-2 text-lg">
+          <FaUsers></FaUsers> ALL USERS
+        </span>
+      </NavigationLink>
+    </>
+  );
 
+  const sharedOption = (
+    <>
       <NavigationLink to="/">
         <span className="flex items-center gap-2 text-lg">
           <FaHome></FaHome> HOME
@@ -66,6 +105,7 @@ const Dashboard = () => {
       </NavigationLink>
     </>
   );
+
   return (
     <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -84,7 +124,13 @@ const Dashboard = () => {
           <div className="my-5">
             <Heading></Heading>
           </div>
-          <ul className="space-y-2 p-4 w-80 ">{slideBarOptions}</ul>
+          <ul className="space-y-2 p-4 w-80 ">
+            {isAdmin ? adminOption : userOption}
+
+            <div className="divider after:bg-white before:bg-white"></div>
+
+            {sharedOption}
+          </ul>
           <label
             htmlFor="my-drawer-2"
             className="btn btn-primary drawer-button lg:hidden"
