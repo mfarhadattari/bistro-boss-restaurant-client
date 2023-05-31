@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import Swal from "sweetalert2";
@@ -10,6 +10,7 @@ const SocialLogin = () => {
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
+  //   const facebookProvider = new FacebookAuthProvider();
 
   /* -----------------------------------------------------------
   !---------------------- Redirect -------------------- */
@@ -35,7 +36,6 @@ const SocialLogin = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (
               data.insertedId ||
               data.alreadyExist ||
@@ -71,9 +71,12 @@ const SocialLogin = () => {
     <div className="space-y-3 p-5">
       <div className="text-center text-xl">Or sign in with</div>
       <div className="flex gap-5 items-center justify-center">
-        <button className="btn btn-circle btn-outline text-2xl">
+        {/* <button
+          className="btn btn-circle btn-outline text-2xl"
+          onClick={() => handelSocialSignIn(facebookProvider)}
+        >
           <FaFacebookF></FaFacebookF>
-        </button>
+        </button> */}
         <button
           className="btn btn-circle btn-outline text-2xl"
           onClick={() => handelSocialSignIn(googleProvider)}
