@@ -10,10 +10,10 @@ import {
   FaUsers,
   FaUtensils,
   FaWallet,
+  FaShoppingCart,
+  FaCalendarCheck,
+  FaCommentDots,
 } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
-import { FaCalendarCheck } from "react-icons/fa";
-import { FaCommentDots } from "react-icons/fa";
 import Heading from "../components/Heading";
 
 const Dashboard = () => {
