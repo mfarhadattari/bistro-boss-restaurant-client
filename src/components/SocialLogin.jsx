@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider";
-import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -9,6 +9,7 @@ const SocialLogin = () => {
   const { socialSignIn } = useContext(AuthContext);
 
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   /* -----------------------------------------------------------
   !---------------------- Redirect -------------------- */
@@ -21,6 +22,7 @@ const SocialLogin = () => {
   const handelSocialSignIn = (provider) => {
     socialSignIn(provider)
       .then(({ user }) => {
+        console.log(user);
         fetch("http://localhost:5000/users", {
           method: "POST",
           headers: {
@@ -33,7 +35,12 @@ const SocialLogin = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            if (data.insertedId || data.alreadyExist) {
+            console.log(data);
+            if (
+              data.insertedId ||
+              data.alreadyExist ||
+              data.modifiedCount > 0
+            ) {
               Swal.fire({
                 title: "Success",
                 icon: "success",
@@ -48,7 +55,15 @@ const SocialLogin = () => {
           });
       })
       .catch((error) => {
-        console.log(error);
+        Swal.fire({
+          title: "Error",
+          icon: "error",
+          confirmButtonColor: "red",
+          html: `
+            <p class="capitalize">
+              ${error.message.split("/")[1].slice(0, -2).split("-").join(" ")}
+            </p>`,
+        });
       });
   };
 
@@ -65,7 +80,10 @@ const SocialLogin = () => {
         >
           <FaGoogle></FaGoogle>
         </button>
-        <button className="btn btn-circle btn-outline text-2xl">
+        <button
+          className="btn btn-circle btn-outline text-2xl"
+          onClick={() => handelSocialSignIn(githubProvider)}
+        >
           <FaGithub></FaGithub>
         </button>
       </div>
