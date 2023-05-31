@@ -38,13 +38,13 @@ const Register = () => {
           },
           body: JSON.stringify({
             email: user.email,
-            displayName: user.displayName,
+            displayName: data.name,
           }),
         })
           .then((res) => res.json())
           .then((data) => {
             setLoading(false);
-            if (data.insertedId) {
+            if (data.insertedId || data.alreadyExist) {
               Swal.fire({
                 title: "Success",
                 icon: "success",
