@@ -7,6 +7,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "./../../providers/AuthProvider";
 import LoadingBtn from "../../components/Buttons/LoadingBtn";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin";
 
 const Register = () => {
   //! AuthContext
@@ -185,6 +186,7 @@ const Register = () => {
               </Link>
             </p>
           </form>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </section>

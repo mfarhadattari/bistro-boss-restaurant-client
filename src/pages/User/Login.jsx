@@ -11,6 +11,7 @@ import SetTitle from "../../components/SetTitle";
 import LoadingBtn from "./../../components/Buttons/LoadingBtn";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin";
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
@@ -154,6 +155,7 @@ const Login = () => {
               </Link>
             </p>
           </form>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </section>
