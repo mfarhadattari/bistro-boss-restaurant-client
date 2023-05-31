@@ -28,20 +28,35 @@ const Register = () => {
   const onSubmit = (data) => {
     setLoading(true);
     createUser(data.email, data.password)
-      .then(() => {
+      .then(({ user }) => {
         updateUserInfo(data.name, data.photoURL);
-        setLoading(false);
-        Swal.fire({
-          title: "Success",
-          icon: "success",
-          text: "Successfully Register! Please Login",
-          showConfirmButton: true,
-          confirmButtonColor: "green",
-          confirmButtonText: "Ok",
-        }).then(() => {
-          logoutUser();
-          navigate("/login");
-        });
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            email: user.email,
+            displayName: user.displayName,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setLoading(false);
+            if (data.insertedId) {
+              Swal.fire({
+                title: "Success",
+                icon: "success",
+                text: "Successfully Register! Please Login",
+                showConfirmButton: true,
+                confirmButtonColor: "green",
+                confirmButtonText: "Ok",
+              }).then(() => {
+                logoutUser();
+                navigate("/login");
+              });
+            }
+          });
       })
       .catch((error) => {
         setLoading(false);
@@ -99,8 +114,8 @@ const Register = () => {
                 className="input input-bordered"
                 {...register("photoURL", { required: true })}
               />
-              {errors.name && (
-                <ErrorMessage message="Name is required"></ErrorMessage>
+              {errors.photoURL && (
+                <ErrorMessage message="Photo URL is required"></ErrorMessage>
               )}
             </div>
 
