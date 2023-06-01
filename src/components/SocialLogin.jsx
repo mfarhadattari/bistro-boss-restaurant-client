@@ -22,7 +22,6 @@ const SocialLogin = () => {
   const handelSocialSignIn = (provider) => {
     socialSignIn(provider)
       .then(({ user }) => {
-        console.log(user);
         fetch("http://localhost:5000/users", {
           method: "POST",
           headers: {

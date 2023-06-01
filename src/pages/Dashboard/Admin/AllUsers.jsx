@@ -4,14 +4,16 @@ import SetTitle from "../../../components/SetTitle";
 import UserItem from "../../../components/UserItem";
 import Swal from "sweetalert2";
 import useSecureAxios from "../../../hooks/useSecureAxios";
+import useAuthContext from "../../../hooks/useAuthContext";
 
 const AllUsers = () => {
   const { axiosSecure } = useSecureAxios();
+  const { user } = useAuthContext();
 
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosSecure("/all-users");
+      const res = await axiosSecure(`/all-users?email=${user.email}`);
       return res.data;
     },
   });

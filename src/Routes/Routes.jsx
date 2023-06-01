@@ -10,6 +10,7 @@ import RouteProtector from "./RouteProtector";
 import UserHome from "../pages/Dashboard/User/UserHome";
 import Carts from "../pages/Dashboard/User/Carts";
 import AllUsers from "../pages/Dashboard/Admin/AllUsers";
+import AdminRoute from "./AdminRoute";
 
 const Routes = createBrowserRouter([
   {
@@ -56,7 +57,11 @@ const Routes = createBrowserRouter([
       },
       {
         path: "all-users",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
     ],
   },

@@ -18,9 +18,6 @@ import Heading from "../components/Heading";
 import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-  // TODO: DYNAMICALLY GET IS ADMIN
-  // const isAdmin = true;
-
   const { isAdmin } = useAdmin();
 
   const userOption = (
