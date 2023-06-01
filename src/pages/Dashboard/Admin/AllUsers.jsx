@@ -2,15 +2,36 @@ import { useQuery } from "@tanstack/react-query";
 import SectionHeader from "../../../components/SectionHeader";
 import SetTitle from "../../../components/SetTitle";
 import UserItem from "../../../components/UserItem";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/users");
       return res.json();
     },
   });
+
+  const handelMakeAdmin = (user) => {
+    fetch(`http://localhost:5000/users/admin/${user._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: `${user.displayName} is Admin now!`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      });
+  };
+
   return (
     <section>
       <SetTitle title="Users - Bistro Boss Restaurant"></SetTitle>
@@ -39,7 +60,12 @@ const AllUsers = () => {
             </thead>
             <tbody>
               {users.map((user, index) => (
-                <UserItem key={user._id} index={index} user={user}></UserItem>
+                <UserItem
+                  key={user._id}
+                  index={index}
+                  user={user}
+                  handelMakeAdmin={handelMakeAdmin}
+                ></UserItem>
               ))}
             </tbody>
           </table>
