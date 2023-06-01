@@ -18,6 +18,7 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
   const [loginDisabled, setLoginDisabled] = useState(true);
+  console.log(loginDisabled)
 
   /* -----------------------------------------------------------
   !---------------------- Redirect -------------------- */
@@ -143,7 +144,9 @@ const Login = () => {
               <LoadingBtn
                 loading={loading}
                 className="btn bg-[#D1A054] border-0"
-                disabled={loginDisabled}
+                // disabled={loginDisabled}
+                // TODO: Have to login btn disabled conditionally
+                disabled={false}
               >
                 Login
               </LoadingBtn>

@@ -20,6 +20,7 @@ const UserItem = ({ user, index, handelMakeAdmin }) => {
         )}
       </td>
       <td className="text-center">
+        {/* TODO: DELETE ACTION */}
         <button className="btn bg-red-600 btn-square border-0 text-xl">
           <FaTrashAlt></FaTrashAlt>
         </button>
