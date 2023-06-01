@@ -6,15 +6,15 @@ import {
   LoadCanvasTemplate,
 } from "react-simple-captcha";
 
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SetTitle from "../../components/SetTitle";
 import LoadingBtn from "./../../components/Buttons/LoadingBtn";
-import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const Login = () => {
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser } = useAuthContext();
 
   const [loading, setLoading] = useState(false);
   const [loginDisabled, setLoginDisabled] = useState(true);

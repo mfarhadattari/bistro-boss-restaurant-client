@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { AuthContext } from "./../providers/AuthProvider";
 import Loader from "./../components/Loader";
 import { Navigate, useLocation } from "react-router-dom";
+import useAuthContext from "../hooks/useAuthContext";
 
 const RouteProtector = ({ children }) => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading } = useAuthContext();
   const location = useLocation();
 
   if (loading) {

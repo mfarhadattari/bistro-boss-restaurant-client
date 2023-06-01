@@ -1,6 +1,7 @@
 import FoodCard from "../../components/foodCard";
 
 const CategoryTab = ({ items }) => {
+  // TODO : PAGINATION
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-20">
       {items.map((item) => (

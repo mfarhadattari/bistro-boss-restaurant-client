@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
+import useAuthContext from "../hooks/useAuthContext";
 
 const Avatar = () => {
-  const { user, logoutUser } = useContext(AuthContext);
+  const { user, logoutUser } = useAuthContext();
   const handelLogout = () => {
     Swal.fire({
       icon: "question",
@@ -38,7 +37,7 @@ const Avatar = () => {
           {user?.photoURL ? (
             <img src={user.photoURL} />
           ) : (
-            <img src="https://img.freepik.com/free-icon/user_318-804790.jpg?size=626&ext=jpg&uid=R88597874&ga=GA1.2.1258473558.1680259642&semt=sph" />
+            <img src="https://cdn-icons-png.flaticon.com/128/149/149071.png" />
           )}
         </div>
       </div>

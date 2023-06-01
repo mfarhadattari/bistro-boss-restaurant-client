@@ -3,15 +3,15 @@ import img from "../../assets/others/authentication.png";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../components/Message/ErrorMessage";
 import SetTitle from "../../components/SetTitle";
-import { useContext, useState } from "react";
-import { AuthContext } from "./../../providers/AuthProvider";
 import LoadingBtn from "../../components/Buttons/LoadingBtn";
 import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin";
+import useAuthContext from "../../hooks/useAuthContext";
+import { useState } from "react";
 
 const Register = () => {
   //! AuthContext
-  const { createUser, logoutUser, updateUserInfo } = useContext(AuthContext);
+  const { createUser, logoutUser, updateUserInfo } = useAuthContext();
 
   const [loading, setLoading] = useState(false);
 

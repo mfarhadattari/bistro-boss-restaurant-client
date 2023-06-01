@@ -1,13 +1,12 @@
 import { FaBars } from "react-icons/fa";
 import NavigationLink from "../../components/NavigationLink";
-import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
 import Avatar from "../../components/Avatar";
 import CartIcon from "../../components/CartIcon";
 import Heading from "../../components/Heading";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const NavigationBar = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuthContext();
   const navOptions = (
     <>
       <NavigationLink to="/">Home</NavigationLink>

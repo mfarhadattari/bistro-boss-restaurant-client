@@ -1,12 +1,11 @@
-import { useContext } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { AuthContext } from "../providers/AuthProvider";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAuthContext from "../hooks/useAuthContext";
 
 const SocialLogin = () => {
-  const { socialSignIn } = useContext(AuthContext);
+  const { socialSignIn } = useAuthContext();
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
