@@ -41,7 +41,7 @@ const CartItem = ({ cartItem, no }) => {
       <td className="text-center">
         <div className="avatar">
           <div className="rounded-lg  w-16 h-16">
-            <img src={image} alt="Avatar Tailwind CSS Component" />
+            <img src={image} alt={name} />
           </div>
         </div>
       </td>

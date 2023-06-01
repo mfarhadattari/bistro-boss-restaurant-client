@@ -33,7 +33,7 @@ const Carts = () => {
         <div className="overflow-x-auto w-full">
           <table className="table w-full mb-5">
             {/* head */}
-            <thead className="">
+            <thead>
               <tr>
                 <th className="bg-[#D1A054] text-white text-lg text-center">
                   <label>#</label>
