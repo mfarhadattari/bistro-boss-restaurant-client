@@ -3,33 +3,32 @@ import SectionHeader from "../../../components/SectionHeader";
 import SetTitle from "../../../components/SetTitle";
 import UserItem from "../../../components/UserItem";
 import Swal from "sweetalert2";
+import useSecureAxios from "../../../hooks/useSecureAxios";
 
 const AllUsers = () => {
+  const { axiosSecure } = useSecureAxios();
+
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/users");
-      return res.json();
+      const res = await axiosSecure("/users");
+      return res.data;
     },
   });
 
   const handelMakeAdmin = (user) => {
-    fetch(`http://localhost:5000/users/admin/${user._id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount > 0) {
-          refetch();
-          Swal.fire({
-            position: "top-center",
-            icon: "success",
-            title: `${user.displayName} is Admin now!`,
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        }
-      });
+    axiosSecure.patch(`/users/admin/${user._id}`).then(({ data }) => {
+      if (data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: `${user.displayName} is Admin now!`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+    });
   };
 
   return (

@@ -13,9 +13,12 @@ const NavigationBar = () => {
       <NavigationLink to="/menu">Menu</NavigationLink>
       <NavigationLink to="/shop">Shop</NavigationLink>
       <NavigationLink to="/dashboard/">Dashboard</NavigationLink>
-      <CartIcon></CartIcon>
+
       {user ? (
-        <Avatar></Avatar>
+        <>
+          <CartIcon></CartIcon>
+          <Avatar></Avatar>
+        </>
       ) : (
         <NavigationLink to="/login">Login</NavigationLink>
       )}
