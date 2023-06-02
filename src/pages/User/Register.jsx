@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import ErrorMessage from "../../components/Message/ErrorMessage";
 import SetTitle from "../../components/SetTitle";
 import LoadingBtn from "../../components/Buttons/LoadingBtn";
-import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin";
 import useAuthContext from "../../hooks/useAuthContext";
 import { useState } from "react";
+import FirebaseErrorAlert from "../../components/Message/FirebaseErrorAlert";
+import SuccessAlert from "../../components/Message/SuccessAlert";
 
 const Register = () => {
   //! AuthContext
@@ -45,14 +46,7 @@ const Register = () => {
           .then((data) => {
             setLoading(false);
             if (data.insertedId || data.alreadyExist) {
-              Swal.fire({
-                title: "Success",
-                icon: "success",
-                text: "Successfully Register! Please Login",
-                showConfirmButton: true,
-                confirmButtonColor: "green",
-                confirmButtonText: "Ok",
-              }).then(() => {
+              SuccessAlert("Successfully Register! Please Login").then(() => {
                 logoutUser();
                 navigate("/login");
               });
@@ -61,15 +55,7 @@ const Register = () => {
       })
       .catch((error) => {
         setLoading(false);
-        Swal.fire({
-          title: "Error",
-          icon: "error",
-          confirmButtonColor: "red",
-          html: `
-            <p class="capitalize">
-              ${error.message.split("/")[1].slice(0, -2).split("-").join(" ")}
-            </p>`,
-        });
+        FirebaseErrorAlert(error.message);
       });
   };
 

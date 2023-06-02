@@ -1,6 +1,7 @@
 import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
-import Swal from "sweetalert2";
 import useCart from "../hooks/useCart";
+import SuccessAlert from "./Message/SuccessAlert";
+import ConfirmationAlert from "./Message/ConfirmationAlert";
 
 const CartItem = ({ cartItem, no }) => {
   const { refetchCart } = useCart();
@@ -9,16 +10,7 @@ const CartItem = ({ cartItem, no }) => {
   /* ---------------------------------------------------------------
   !-------------------------- DELETE ITEM HANDLER ------------- */
   const deleteItem = (id) => {
-    Swal.fire({
-      icon: "question",
-      title: "Want to remove?",
-      showConfirmButton: true,
-      confirmButtonText: "Yes",
-      confirmButtonColor: "red",
-      showCancelButton: true,
-      cancelButtonColor: "Green",
-      cancelButtonText: "No",
-    }).then((res) => {
+    ConfirmationAlert("Want to remove?").then((res) => {
       if (res.isConfirmed) {
         fetch(`http://localhost:5000/carts/${id}`, {
           method: "DELETE",
@@ -26,6 +18,7 @@ const CartItem = ({ cartItem, no }) => {
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
+              SuccessAlert("Delete Item Successfully");
               refetchCart();
             }
           });

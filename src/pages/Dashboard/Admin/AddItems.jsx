@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import ErrorMessage from "../../../components/Message/ErrorMessage";
 import useAuthContext from "../../../hooks/useAuthContext";
-import Swal from "sweetalert2";
+import SuccessAlert from "../../../components/Message/SuccessAlert";
 
 const AddItems = () => {
   const { authUser } = useAuthContext();
@@ -40,18 +40,12 @@ const AddItems = () => {
             .post(`/add-item?email=${authUser.email}`, newItem)
             .then(({ data }) => {
               if (data.insertedId) {
-                Swal.fire({
-                  icon: "success",
-                  title: "Added Item Successfully!",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
+                SuccessAlert("Added Item Successfully!");
               }
             });
         }
       });
   };
-
 
   return (
     <section className="container mx-auto">

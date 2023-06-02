@@ -1,5 +1,5 @@
 import { FaTrashAlt, FaUserShield } from "react-icons/fa";
-const UserItem = ({ user, index, handelMakeAdmin }) => {
+const UserItem = ({ user, index, handelMakeAdmin, handelDeleteUser }) => {
   const { displayName, email, role } = user;
 
   return (
@@ -21,7 +21,10 @@ const UserItem = ({ user, index, handelMakeAdmin }) => {
       </td>
       <td className="text-center">
         {/* TODO: DELETE ACTION */}
-        <button className="btn bg-red-600 btn-square border-0 text-xl">
+        <button
+          className="btn bg-red-600 btn-square border-0 text-xl"
+          onClick={() => handelDeleteUser(user)}
+        >
           <FaTrashAlt></FaTrashAlt>
         </button>
       </td>

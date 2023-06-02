@@ -4,7 +4,8 @@ import useMenu from "../../../hooks/useMenu";
 import ManageItem from "../../../components/ManageItem";
 import useAuthContext from "../../../hooks/useAuthContext";
 import useSecureAxios from "../../../hooks/useSecureAxios";
-import Swal from "sweetalert2";
+import SuccessAlert from "../../../components/Message/SuccessAlert";
+import ConfirmationAlert from "../../../components/Message/ConfirmationAlert";
 
 const ManageAllItems = () => {
   const { menu, refetch } = useMenu();
@@ -12,22 +13,13 @@ const ManageAllItems = () => {
   const { axiosSecure } = useSecureAxios();
 
   const deleteItem = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      cancelButtonText: "No",
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "green",
-      confirmButtonText: "Yes",
-    }).then((result) => {
+    ConfirmationAlert("Sure Want to remove?").then((result) => {
       if (result.isConfirmed) {
         axiosSecure
           .delete(`/delete-item/${id}?email=${authUser.email}`)
           .then(({ data }) => {
             if (data.deletedCount > 0) {
-              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              SuccessAlert("Your file has been deleted.");
               refetch();
             }
           });

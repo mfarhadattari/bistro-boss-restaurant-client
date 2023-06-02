@@ -1,13 +1,12 @@
 import AddToCartBtn from "./Buttons/AddToCartBtn";
-import Swal from "sweetalert2";
-import useCart from "../hooks/useCart";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
+import SuccessAlert from "./Message/SuccessAlert";
+import ConfirmationAlert from "./Message/ConfirmationAlert";
 
 const FoodCard = ({ item }) => {
   const { authUser } = useAuthContext();
   const { image, name, price, recipe } = item;
-  const { refetchCart } = useCart();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,14 +14,7 @@ const FoodCard = ({ item }) => {
   const handelAddToCart = (menuItem) => {
     const { image, name, price, _id } = menuItem;
     if (!authUser) {
-      Swal.fire({
-        icon: "warning",
-        title: "Please Login for add food!",
-        showConfirmButton: true,
-        showCancelButton: true,
-        confirmButtonText: "Ok",
-        cancelButtonText: "No",
-      }).then((res) => {
+      ConfirmationAlert("Please Login for add food!").then((res) => {
         if (res.isConfirmed) {
           navigate("/login", {
             state: { from: location.pathname },
@@ -48,13 +40,8 @@ const FoodCard = ({ item }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          refetchCart();
           if (data.insertedId || data.modifiedCount > 0) {
-            Swal.fire({
-              icon: "success",
-              title: "Successful",
-              text: "Successfully added to cart",
-            });
+            SuccessAlert("Successfully added to cart");
           }
         });
     }

@@ -1,28 +1,18 @@
-import Swal from "sweetalert2";
 import useAuthContext from "../hooks/useAuthContext";
+import SuccessAlert from "./Message/SuccessAlert";
+import FirebaseErrorAlert from "./Message/FirebaseErrorAlert";
+import ConfirmationAlert from "./Message/ConfirmationAlert";
 
 const Avatar = () => {
   const { authUser, logoutUser } = useAuthContext();
   const handelLogout = () => {
-    Swal.fire({
-      icon: "question",
-      title: "Warning",
-      text: "Are you sure?",
-      showCancelButton: true,
-      showConfirmButton: true,
-      confirmButtonText: "Yes",
-      confirmButtonColor: "red",
-      cancelButtonText: "No",
-      cancelButtonColor: "green",
-    }).then((res) => {
+    ConfirmationAlert("Want to logout?").then((res) => {
       if (res.isConfirmed) {
-        logoutUser();
-        Swal.fire({
-          title: "Success",
-          icon: "success",
-          text: "Successfully Logout",
-          confirmButtonColor: "green",
-        });
+        logoutUser()
+          .then(() => {
+            SuccessAlert("Successfully Logout");
+          })
+          .catch((error) => FirebaseErrorAlert(error.message));
       }
     });
   };

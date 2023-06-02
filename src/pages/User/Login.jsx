@@ -9,16 +9,17 @@ import {
 import { useEffect, useState } from "react";
 import SetTitle from "../../components/SetTitle";
 import LoadingBtn from "./../../components/Buttons/LoadingBtn";
-import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin";
 import useAuthContext from "../../hooks/useAuthContext";
+import SuccessAlert from "../../components/Message/SuccessAlert";
+import FirebaseErrorAlert from "../../components/Message/FirebaseErrorAlert";
 
 const Login = () => {
   const { loginUser } = useAuthContext();
 
   const [loading, setLoading] = useState(false);
   const [loginDisabled, setLoginDisabled] = useState(true);
-  console.log(loginDisabled)
+  console.log(loginDisabled);
 
   /* -----------------------------------------------------------
   !---------------------- Redirect -------------------- */
@@ -59,26 +60,13 @@ const Login = () => {
         setLoading(false);
         setLoginDisabled(true);
         form.reset();
-        Swal.fire({
-          title: "Success",
-          icon: "success",
-          text: "Successfully Login",
-          confirmButtonColor: "green",
-        }).then(() => {
+        SuccessAlert("Successfully Login").then(() => {
           navigate(from, { replace: true });
         });
       })
       .catch((error) => {
         setLoading(false);
-        Swal.fire({
-          title: "Error",
-          icon: "error",
-          confirmButtonColor: "red",
-          html: `
-            <p class="capitalize">
-              ${error.message.split("/")[1].slice(0, -2).split("-").join(" ")}
-            </p>`,
-        });
+        FirebaseErrorAlert(error.message);
       });
   };
 

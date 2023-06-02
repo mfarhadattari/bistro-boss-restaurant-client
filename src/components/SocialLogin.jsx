@@ -1,8 +1,9 @@
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
-import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
+import FirebaseErrorAlert from "./Message/FirebaseErrorAlert";
+import SuccessAlert from './Message/SuccessAlert';
 
 const SocialLogin = () => {
   const { socialSignIn } = useAuthContext();
@@ -39,29 +40,14 @@ const SocialLogin = () => {
               data.alreadyExist ||
               data.modifiedCount > 0
             ) {
-              Swal.fire({
-                title: "Success",
-                icon: "success",
-                text: "Successfully Register! Please Login",
-                showConfirmButton: true,
-                confirmButtonColor: "green",
-                confirmButtonText: "Ok",
-              }).then(() => {
+              SuccessAlert("Successfully Login!").then(() => {
                 navigate(from, { replace: true });
               });
             }
           });
       })
       .catch((error) => {
-        Swal.fire({
-          title: "Error",
-          icon: "error",
-          confirmButtonColor: "red",
-          html: `
-            <p class="capitalize">
-              ${error.message.split("/")[1].slice(0, -2).split("-").join(" ")}
-            </p>`,
-        });
+        FirebaseErrorAlert(error.message)
       });
   };
 

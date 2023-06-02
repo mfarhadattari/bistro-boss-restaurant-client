@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import SectionHeader from "../../../components/SectionHeader";
 import SetTitle from "../../../components/SetTitle";
 import UserItem from "../../../components/UserItem";
-import Swal from "sweetalert2";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import useAuthContext from "../../../hooks/useAuthContext";
+import SuccessAlert from "../../../components/Message/SuccessAlert";
 
 const AllUsers = () => {
   const { axiosSecure } = useSecureAxios();
@@ -23,14 +23,8 @@ const AllUsers = () => {
       .patch(`/users/admin/${user._id}?email=${authUser.email}`)
       .then(({ data }) => {
         if (data.modifiedCount > 0) {
+          SuccessAlert(`${user.displayName} is now admin now!`);
           refetch();
-          Swal.fire({
-            position: "top-center",
-            icon: "success",
-            title: `${user.displayName} is Admin now!`,
-            showConfirmButton: false,
-            timer: 2000,
-          });
         }
       });
   };
