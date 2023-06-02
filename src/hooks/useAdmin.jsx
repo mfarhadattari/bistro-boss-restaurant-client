@@ -3,16 +3,16 @@ import useAuthContext from "./useAuthContext";
 import useSecureAxios from "./useSecureAxios";
 const useAdmin = () => {
   const { axiosSecure } = useSecureAxios();
-  const { user } = useAuthContext();
+  const { authUser } = useAuthContext();
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminLoading, setAdminLoading] = useState(true);
 
   useEffect(() => {
-    axiosSecure.get(`/user/admin?email=${user?.email}`).then(({ data }) => {
+    axiosSecure.get(`/user/admin?email=${authUser?.email}`).then(({ data }) => {
       setIsAdmin(data.isAdmin);
       setAdminLoading(false);
     });
-  }, [axiosSecure, user]);
+  }, [axiosSecure, authUser]);
 
   return { isAdmin, adminLoading };
 };

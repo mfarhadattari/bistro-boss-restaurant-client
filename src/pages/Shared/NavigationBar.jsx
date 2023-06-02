@@ -6,7 +6,7 @@ import Heading from "../../components/Heading";
 import useAuthContext from "../../hooks/useAuthContext";
 
 const NavigationBar = () => {
-  const { user } = useAuthContext();
+  const { authUser } = useAuthContext();
   const navOptions = (
     <>
       <NavigationLink to="/">Home</NavigationLink>
@@ -14,7 +14,7 @@ const NavigationBar = () => {
       <NavigationLink to="/shop">Shop</NavigationLink>
       <NavigationLink to="/dashboard/">Dashboard</NavigationLink>
 
-      {user ? (
+      {authUser ? (
         <>
           <CartIcon></CartIcon>
           <Avatar></Avatar>

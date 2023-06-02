@@ -8,29 +8,31 @@ import useAuthContext from "../../../hooks/useAuthContext";
 
 const AllUsers = () => {
   const { axiosSecure } = useSecureAxios();
-  const { user } = useAuthContext();
+  const { authUser } = useAuthContext();
 
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosSecure(`/all-users?email=${user.email}`);
+      const res = await axiosSecure(`/all-users?email=${authUser.email}`);
       return res.data;
     },
   });
 
   const handelMakeAdmin = (user) => {
-    axiosSecure.patch(`/users/admin/${user._id}`).then(({ data }) => {
-      if (data.modifiedCount > 0) {
-        refetch();
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: `${user.displayName} is Admin now!`,
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      }
-    });
+    axiosSecure
+      .patch(`/users/admin/${user._id}?email=${authUser.email}`)
+      .then(({ data }) => {
+        if (data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: `${user.displayName} is Admin now!`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      });
   };
 
   return (

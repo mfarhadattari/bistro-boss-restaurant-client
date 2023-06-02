@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 const ManageAllItems = () => {
   const { menu, refetch } = useMenu();
-  const { user } = useAuthContext();
+  const { authUser } = useAuthContext();
   const { axiosSecure } = useSecureAxios();
 
   const deleteItem = (id) => {
@@ -24,7 +24,7 @@ const ManageAllItems = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .delete(`/delete-item/${id}?email=${user.email}`)
+          .delete(`/delete-item/${id}?email=${authUser.email}`)
           .then(({ data }) => {
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "Your file has been deleted.", "success");

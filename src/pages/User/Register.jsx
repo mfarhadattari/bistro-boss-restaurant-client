@@ -12,10 +12,10 @@ import { useState } from "react";
 const Register = () => {
   //! AuthContext
   const { createUser, logoutUser, updateUserInfo } = useAuthContext();
-
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
+
+  // TODO: Image Uploading System
 
   //! react hook form
   const {

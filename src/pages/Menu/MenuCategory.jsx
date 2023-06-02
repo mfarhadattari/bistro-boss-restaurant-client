@@ -4,6 +4,7 @@ import MenuItem from "../../components/MenuItem";
 import Cover from "../../components/cover";
 
 const MenuCategory = ({ menuItems, bgImg, heading, subheading }) => {
+  // TODO : Display shop tab according to category from menu page
   return (
     <section className="mt-20">
       {heading && (

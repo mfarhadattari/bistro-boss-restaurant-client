@@ -8,7 +8,7 @@ import useAuthContext from "../../../hooks/useAuthContext";
 import Swal from "sweetalert2";
 
 const AddItems = () => {
-  const { user } = useAuthContext();
+  const { authUser } = useAuthContext();
   const { axiosSecure } = useSecureAxios();
   const {
     register,
@@ -37,7 +37,7 @@ const AddItems = () => {
             image: imgURL,
           };
           axiosSecure
-            .post(`/add-item?email=${user.email}`, newItem)
+            .post(`/add-item?email=${authUser.email}`, newItem)
             .then(({ data }) => {
               if (data.insertedId) {
                 Swal.fire({

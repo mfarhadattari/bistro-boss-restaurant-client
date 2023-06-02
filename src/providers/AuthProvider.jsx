@@ -15,7 +15,7 @@ const auth = getAuth(app);
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   /* --------------------------------------------------------
@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        setUser(currentUser);
+        setAuthUser(currentUser);
         axios
           .post("http://localhost:5000/jwt", {
             email: currentUser.email,
@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
           });
         setLoading(false);
       } else {
-        setUser(null);
+        setAuthUser(null);
         localStorage.removeItem("bistro-boss-token");
         setLoading(false);
       }
@@ -86,7 +86,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const authInfo = {
-    user,
+    authUser,
     loading,
     createUser,
     loginUser,

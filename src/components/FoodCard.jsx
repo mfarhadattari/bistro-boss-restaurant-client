@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
 
 const FoodCard = ({ item }) => {
-  const { user } = useAuthContext();
+  const { authUser } = useAuthContext();
   const { image, name, price, recipe } = item;
   const { refetchCart } = useCart();
 
@@ -14,7 +14,7 @@ const FoodCard = ({ item }) => {
 
   const handelAddToCart = (menuItem) => {
     const { image, name, price, _id } = menuItem;
-    if (!user) {
+    if (!authUser) {
       Swal.fire({
         icon: "warning",
         title: "Please Login for add food!",
@@ -31,13 +31,13 @@ const FoodCard = ({ item }) => {
         }
       });
     }
-    if (user && user.email) {
+    if (authUser && authUser.email) {
       const cartItem = {
         foodID: _id,
         name,
         image,
         price,
-        email: user.email,
+        email: authUser.email,
       };
       fetch("http://localhost:5000/carts", {
         method: "POST",

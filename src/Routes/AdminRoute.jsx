@@ -4,7 +4,7 @@ import useAuthContext from "../hooks/useAuthContext";
 import useAdmin from "../hooks/useAdmin";
 
 const AdminRoute = ({ children }) => {
-  const { user, loading } = useAuthContext();
+  const { authUser, loading } = useAuthContext();
   const { isAdmin, adminLoading } = useAdmin();
 
   if (loading || adminLoading) {
@@ -14,7 +14,7 @@ const AdminRoute = ({ children }) => {
       </div>
     );
   }
-  if (user && isAdmin) {
+  if (authUser && isAdmin) {
     return children;
   } else {
     return <Navigate to="/"></Navigate>;

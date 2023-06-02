@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
 
 const RouteProtector = ({ children }) => {
-  const { user, loading } = useAuthContext();
+  const { authUser, loading } = useAuthContext();
   const location = useLocation();
 
   if (loading) {
@@ -13,7 +13,7 @@ const RouteProtector = ({ children }) => {
       </div>
     );
   }
-  if (user) {
+  if (authUser) {
     return children;
   } else {
     return (
