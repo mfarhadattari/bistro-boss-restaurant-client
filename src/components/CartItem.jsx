@@ -40,7 +40,7 @@ const CartItem = ({ cartItem, no }) => {
       </th>
       <td className="text-center">
         <div className="avatar">
-          <div className="rounded-lg  w-16 h-16">
+          <div className="rounded-lg  w-20 h-20">
             <img src={image} alt={name} />
           </div>
         </div>
