@@ -2,12 +2,37 @@ import SetTitle from "../../../components/SetTitle";
 import SectionHeader from "../../../components/SectionHeader";
 import useMenu from "../../../hooks/useMenu";
 import ManageItem from "../../../components/ManageItem";
+import useAuthContext from "../../../hooks/useAuthContext";
+import useSecureAxios from "../../../hooks/useSecureAxios";
+import Swal from "sweetalert2";
 
 const ManageAllItems = () => {
-  const { menu } = useMenu();
+  const { menu, refetch } = useMenu();
+  const { user } = useAuthContext();
+  const { axiosSecure } = useSecureAxios();
 
   const deleteItem = (id) => {
-    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      cancelButtonText: "No",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "green",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/delete-item/${id}?email=${user.email}`)
+          .then(({ data }) => {
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              refetch();
+            }
+          });
+      }
+    });
   };
 
   // TODO : Have to Pagination
@@ -41,7 +66,12 @@ const ManageAllItems = () => {
             </thead>
             <tbody>
               {menu.map((item, index) => (
-                <ManageItem key={item._id} index={index} item={item} deleteItem={deleteItem}></ManageItem>
+                <ManageItem
+                  key={item._id}
+                  index={index}
+                  item={item}
+                  deleteItem={deleteItem}
+                ></ManageItem>
               ))}
             </tbody>
           </table>
