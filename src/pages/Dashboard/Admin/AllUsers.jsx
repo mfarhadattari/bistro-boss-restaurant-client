@@ -5,6 +5,7 @@ import UserItem from "../../../components/UserItem";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import useAuthContext from "../../../hooks/useAuthContext";
 import SuccessAlert from "../../../components/Message/SuccessAlert";
+import ConfirmationAlert from "./../../../components/Message/ConfirmationAlert";
 
 const AllUsers = () => {
   const { axiosSecure } = useSecureAxios();
@@ -19,14 +20,18 @@ const AllUsers = () => {
   });
 
   const handelMakeAdmin = (user) => {
-    axiosSecure
-      .patch(`/users/admin/${user._id}?email=${authUser.email}`)
-      .then(({ data }) => {
-        if (data.modifiedCount > 0) {
-          SuccessAlert(`${user.displayName} is now admin now!`);
-          refetch();
-        }
-      });
+    ConfirmationAlert(`Want to make "${user.displayName}" admin?`).then((res) => {
+      if (res.isConfirmed) {
+        axiosSecure
+          .patch(`/users/admin/${user._id}?email=${authUser.email}`)
+          .then(({ data }) => {
+            if (data.modifiedCount > 0) {
+              SuccessAlert(`${user.displayName} is now admin now!`);
+              refetch();
+            }
+          });
+      }
+    });
   };
 
   return (
