@@ -5,20 +5,25 @@ import ErrorMessage from "./../Message/ErrorMessage";
 import "./StripePaymentFormCard.css";
 import { useEffect } from "react";
 import useSecureAxios from "./../../hooks/useSecureAxios";
+import ConfirmationAlert from "./../Message/ConfirmationAlert";
+import useAuthContext from "../../hooks/useAuthContext";
+import ErrorAlert from "./../Message/ErrorAlert";
 
 const StripePaymentFormCard = ({ price }) => {
   const stripe = useStripe();
   const element = useElements();
 
   const { axiosSecure } = useSecureAxios();
+  const { authUser } = useAuthContext();
 
   const [clientSecret, setClientSecret] = useState("");
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [paymentError, setPaymentError] = useState("");
 
   useEffect(() => {
     if (price > 0) {
       axiosSecure.post("create-payment-intent", { price }).then(({ data }) => {
-        setClientSecret(data.clientSecret)
+        setClientSecret(data.clientSecret);
       });
     }
   }, [price, axiosSecure]);
@@ -26,7 +31,7 @@ const StripePaymentFormCard = ({ price }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!stripe || !element) {
+    if (!stripe || !element || !clientSecret || paymentProcessing) {
       return;
     }
 
@@ -35,7 +40,7 @@ const StripePaymentFormCard = ({ price }) => {
       return;
     }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
@@ -43,10 +48,38 @@ const StripePaymentFormCard = ({ price }) => {
     if (error) {
       console.error(error);
       setPaymentError(error.message);
-    } else {
-      setPaymentError("");
-      console.log("paymentMethod:", paymentMethod);
+      return;
     }
+
+    setPaymentError("");
+    setPaymentProcessing(true);
+    ConfirmationAlert(`Sure to payment $${price}?`).then((res) => {
+      if (res.isConfirmed) {
+        stripe
+          .confirmCardPayment(clientSecret, {
+            payment_method: {
+              card,
+              billing_details: {
+                name: authUser.displayName,
+                email: authUser.email,
+              },
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.paymentIntent) {
+              // TODO: Integrate to database
+              console.log(res.paymentIntent);
+            }
+            if (res.error) {
+              ErrorAlert(res.error.message);
+            }
+            setPaymentProcessing(false);
+          });
+      } else {
+        setPaymentProcessing(false);
+      }
+    });
   };
 
   return (
@@ -68,7 +101,11 @@ const StripePaymentFormCard = ({ price }) => {
         }}
       />
       <ErrorMessage message={paymentError}></ErrorMessage>
-      <button type="submit" disabled={!stripe || !clientSecret} className="bg-pink-600">
+      <button
+        type="submit"
+        disabled={!stripe || !clientSecret || paymentProcessing}
+        className="bg-pink-600"
+      >
         Pay
       </button>
     </form>
