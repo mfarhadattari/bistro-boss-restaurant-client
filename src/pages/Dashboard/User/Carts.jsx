@@ -2,6 +2,7 @@ import SectionHeader from "../../../components/SectionHeader";
 import SetTitle from "../../../components/SetTitle";
 import CartItem from "../../../components/CartItem";
 import useCart from "../../../hooks/useCart";
+import { Link } from "react-router-dom";
 
 const Carts = () => {
   const { carts } = useCart();
@@ -27,7 +28,9 @@ const Carts = () => {
             TOTAL PRICE: ${totalPrice}{" "}
           </h1>
           <div>
-            <button className="btn bg-[#D1A054] border-0">PAY</button>
+            <Link className="btn bg-[#D1A054] border-0" to="/dashboard/payment">
+              PAY
+            </Link>
           </div>
         </div>
         <div className="overflow-x-auto w-full">

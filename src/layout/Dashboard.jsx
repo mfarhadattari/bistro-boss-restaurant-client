@@ -16,6 +16,7 @@ import {
 } from "react-icons/fa";
 import Heading from "../components/Heading";
 import useAdmin from "../hooks/useAdmin";
+import CartIcon from "./../components/CartIcon";
 
 const Dashboard = () => {
   const { isAdmin } = useAdmin();
@@ -52,6 +53,9 @@ const Dashboard = () => {
           <FaCalendarCheck></FaCalendarCheck> MY BOOKING
         </span>
       </NavigationLink>
+      <div className="w-fit mx-auto">
+        <CartIcon></CartIcon>
+      </div>
     </>
   );
 
