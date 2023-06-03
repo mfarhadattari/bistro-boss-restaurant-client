@@ -3,18 +3,17 @@ import useAuthContext from "./useAuthContext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+// !create instance
+//   TODO: Have to change base URL
+const axiosSecure = axios.create({
+  baseURL: "http://localhost:5000",
+});
+
 const useSecureAxios = () => {
   const { logoutUser } = useAuthContext();
   const navigate = useNavigate();
-  // create instance
-
-//   TODO: Have to change base URL
-  const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
-  });
 
   useEffect(() => {
-
     // interceptor added to include user token
     axiosSecure.interceptors.request.use((config) => {
       const token = localStorage.getItem("bistro-boss-token");
@@ -24,7 +23,7 @@ const useSecureAxios = () => {
       return config;
     });
 
-    // added interceptor to handel response 
+    // added interceptor to handel response
     axiosSecure.interceptors.response.use(
       (response) => response,
       async (error) => {

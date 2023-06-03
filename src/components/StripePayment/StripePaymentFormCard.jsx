@@ -3,12 +3,25 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 import ErrorMessage from "./../Message/ErrorMessage";
 import "./StripePaymentFormCard.css";
+import { useEffect } from "react";
+import useSecureAxios from "./../../hooks/useSecureAxios";
 
-const StripePaymentFormCard = () => {
+const StripePaymentFormCard = ({ price }) => {
   const stripe = useStripe();
   const element = useElements();
 
+  const { axiosSecure } = useSecureAxios();
+
+  const [clientSecret, setClientSecret] = useState("");
   const [paymentError, setPaymentError] = useState("");
+
+  useEffect(() => {
+    if (price > 0) {
+      axiosSecure.post("create-payment-intent", { price }).then(({ data }) => {
+        setClientSecret(data.clientSecret)
+      });
+    }
+  }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,14 +42,15 @@ const StripePaymentFormCard = () => {
 
     if (error) {
       console.error(error);
-      setPaymentError(error);
+      setPaymentError(error.message);
     } else {
+      setPaymentError("");
       console.log("paymentMethod:", paymentMethod);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="w-3/4 mx-auto">
       <CardElement
         options={{
           style: {
@@ -53,11 +67,10 @@ const StripePaymentFormCard = () => {
           },
         }}
       />
-
-      <button type="submit" disabled={!stripe} className="bg-pink-600">
+      <ErrorMessage message={paymentError}></ErrorMessage>
+      <button type="submit" disabled={!stripe || !clientSecret} className="bg-pink-600">
         Pay
       </button>
-      <ErrorMessage message={paymentError}></ErrorMessage>
     </form>
   );
 };

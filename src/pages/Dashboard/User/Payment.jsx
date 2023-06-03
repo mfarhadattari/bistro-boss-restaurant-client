@@ -3,16 +3,23 @@ import SectionHeader from "./../../../components/SectionHeader";
 import StripePaymentFormCard from "../../../components/StripePayment/StripePaymentFormCard";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import useCart from "./../../../hooks/useCart";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 const Payment = () => {
+  const { carts } = useCart();
+  const total = carts.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const price = parseFloat(total.toFixed(2));
   return (
     <div>
       <SetTitle title="Payment - Bistro Boss Restaurant"></SetTitle>
       <SectionHeader heading="Payment" subHeading="Make your"></SectionHeader>
-      <div>
+      <div className="w-3/4 mx-auto">
         <Elements stripe={stripePromise}>
-          <StripePaymentFormCard></StripePaymentFormCard>
+          <StripePaymentFormCard price={price}></StripePaymentFormCard>
         </Elements>
       </div>
     </div>
