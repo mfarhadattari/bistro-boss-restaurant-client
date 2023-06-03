@@ -8,7 +8,7 @@ const FirebaseErrorAlert = (errorMessage) => {
     icon: "error",
     title: makeSentenceCase(message),
     showConfirmButton: false,
-    timer: 5000,
+    timer: 3000,
   });
 };
 
