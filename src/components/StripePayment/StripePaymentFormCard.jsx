@@ -8,6 +8,8 @@ import useSecureAxios from "./../../hooks/useSecureAxios";
 import ConfirmationAlert from "./../Message/ConfirmationAlert";
 import useAuthContext from "../../hooks/useAuthContext";
 import ErrorAlert from "./../Message/ErrorAlert";
+import useCart from "../../hooks/useCart";
+import moment from "moment/moment";
 
 const StripePaymentFormCard = ({ price }) => {
   const stripe = useStripe();
@@ -15,6 +17,7 @@ const StripePaymentFormCard = ({ price }) => {
 
   const { axiosSecure } = useSecureAxios();
   const { authUser } = useAuthContext();
+  const { carts } = useCart();
 
   const [clientSecret, setClientSecret] = useState("");
   const [paymentProcessing, setPaymentProcessing] = useState(false);
@@ -66,9 +69,30 @@ const StripePaymentFormCard = ({ price }) => {
             },
           })
           .then((res) => {
-            console.log(res);
-            if (res.paymentIntent) {
+            if (res.paymentIntent.status === "succeeded") {
               // TODO: Integrate to database
+              const paymentInfo = {
+                name: authUser.displayName,
+                email: authUser.email,
+                transitionId: res.paymentIntent.id,
+                amount: price,
+                orderStatus: "Pending",
+                paymentTime: moment().format("MMMM DD YYYY , hh:mm:ss"),
+                cartInfo: carts.map((item) => {
+                  return {
+                    _id: item._id,
+                    name: item.name,
+                    foodID: item.foodID,
+                    price: item.price,
+                    quantity: item.quantity,
+                  };
+                }),
+              };
+              axiosSecure
+                .post("/payment-confirmation", paymentInfo)
+                .then(({ data }) => {
+                  console.log(data);
+                });
               console.log(res.paymentIntent);
             }
             if (res.error) {
