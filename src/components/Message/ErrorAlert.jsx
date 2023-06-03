@@ -5,7 +5,7 @@ const ErrorAlert = (message) => {
     icon: "error",
     title: message,
     showConfirmButton: false,
-    timer: 1500,
+    timer: 2000,
   });
 };
 
