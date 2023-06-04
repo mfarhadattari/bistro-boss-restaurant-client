@@ -10,6 +10,7 @@ import {
 import app from "./../firebase/firebase.config";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import FirebaseErrorAlert from "../components/Message/FirebaseErrorAlert";
 
 const auth = getAuth(app);
 export const AuthContext = createContext(null);
@@ -61,7 +62,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setAuthUser(currentUser);
         axios
-          .post("http://localhost:5000/jwt", {
+          .post("https://mfarhad-bistro-boss-restaurant.vercel.app/jwt", {
             email: currentUser.email,
           })
           .then((res) => {
@@ -70,7 +71,7 @@ const AuthProvider = ({ children }) => {
             }
           })
           .catch((error) => {
-            console.error(error);
+            FirebaseErrorAlert(error.message);
           });
         setLoading(false);
       } else {

@@ -23,7 +23,7 @@ const SocialLogin = () => {
   const handelSocialSignIn = (provider) => {
     socialSignIn(provider)
       .then(({ user }) => {
-        fetch("http://localhost:5000/users", {
+        fetch("https://mfarhad-bistro-boss-restaurant.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

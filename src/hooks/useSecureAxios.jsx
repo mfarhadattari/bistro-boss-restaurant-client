@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // !create instance
 //   TODO: Have to change base URL
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://mfarhad-bistro-boss-restaurant.vercel.app",
 });
 
 const useSecureAxios = () => {

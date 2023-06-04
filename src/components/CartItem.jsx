@@ -12,7 +12,7 @@ const CartItem = ({ cartItem, no }) => {
   const deleteItem = (id) => {
     ConfirmationAlert("Want to remove?").then((res) => {
       if (res.isConfirmed) {
-        fetch(`http://localhost:5000/carts/${id}`, {
+        fetch(`https://mfarhad-bistro-boss-restaurant.vercel.app/carts/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

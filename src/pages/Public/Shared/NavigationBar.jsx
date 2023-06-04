@@ -18,7 +18,6 @@ const NavigationBar = () => {
       axiosSecure
         .get(`/user/admin?email=${authUser.email}`)
         .then(({ data }) => {
-          console.log(data);
           setIsAdmin(data.isAdmin);
         });
     }

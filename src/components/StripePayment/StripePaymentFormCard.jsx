@@ -35,7 +35,7 @@ const StripePaymentFormCard = ({ price }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!stripe || !element || !clientSecret || paymentProcessing) {
+    if (!stripe || !element || !clientSecret || paymentProcessing || price < 1) {
       return;
     }
 
@@ -50,7 +50,6 @@ const StripePaymentFormCard = ({ price }) => {
     });
 
     if (error) {
-      console.error(error);
       setPaymentError(error.message);
       return;
     }
@@ -77,7 +76,7 @@ const StripePaymentFormCard = ({ price }) => {
                 transitionId: res.paymentIntent.id,
                 amount: price,
                 orderStatus: "Pending",
-                paymentTime: moment().format("MMMM DD YYYY , hh:mm:ss"),
+                paymentTime: moment().format("MMMM DD YYYY , HH:mm:ss"),
                 cartInfo: carts.map((item) => {
                   return {
                     _id: item._id,
