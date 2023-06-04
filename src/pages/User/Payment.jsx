@@ -1,12 +1,14 @@
-import SetTitle from "./../../../components/SetTitle";
-import SectionHeader from "./../../../components/SectionHeader";
-import StripePaymentFormCard from "../../../components/StripePayment/StripePaymentFormCard";
 import { loadStripe } from "@stripe/stripe-js";
+import useCart from "../../hooks/useCart";
+import StripePaymentFormCard from './../../components/StripePayment/StripePaymentFormCard';
+import SetTitle from "../../components/SetTitle";
+import SectionHeader from "../../components/SectionHeader";
 import { Elements } from "@stripe/react-stripe-js";
-import useCart from "./../../../hooks/useCart";
+
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 const Payment = () => {
+
   const { carts } = useCart();
   const total = carts.reduce(
     (sum, item) => sum + item.price * item.quantity,

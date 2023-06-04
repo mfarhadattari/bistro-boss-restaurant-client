@@ -1,7 +1,8 @@
 import { Navigate } from "react-router-dom";
 import Loader from "../components/Loader";
-import useAuthContext from "../hooks/useAuthContext";
 import useAdmin from "../hooks/useAdmin";
+import useAuthContext from "../hooks/useAuthContext";
+
 
 const AdminRoute = ({ children }) => {
   const { authUser, loading } = useAuthContext();

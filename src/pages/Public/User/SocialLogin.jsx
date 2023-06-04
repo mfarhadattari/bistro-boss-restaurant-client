@@ -1,9 +1,9 @@
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { useLocation, useNavigate } from "react-router-dom";
-import useAuthContext from "../hooks/useAuthContext";
-import FirebaseErrorAlert from "./Message/FirebaseErrorAlert";
-import SuccessAlert from './Message/SuccessAlert';
+import useAuthContext from "../../../hooks/useAuthContext";
+import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
+import SuccessAlert from '../../../components/Message/SuccessAlert';
 
 const SocialLogin = () => {
   const { socialSignIn } = useAuthContext();

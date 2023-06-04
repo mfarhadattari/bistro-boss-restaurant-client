@@ -1,14 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
-import img from "../../assets/others/authentication.png";
 import { useForm } from "react-hook-form";
-import ErrorMessage from "../../components/Message/ErrorMessage";
-import SetTitle from "../../components/SetTitle";
-import LoadingBtn from "../../components/Buttons/LoadingBtn";
-import SocialLogin from "../../components/SocialLogin";
-import useAuthContext from "../../hooks/useAuthContext";
+import img from "../../../assets/others/authentication.png";
+import useAuthContext from "../../../hooks/useAuthContext";
 import { useState } from "react";
-import FirebaseErrorAlert from "../../components/Message/FirebaseErrorAlert";
-import SuccessAlert from "../../components/Message/SuccessAlert";
+import SuccessAlert from "../../../components/Message/SuccessAlert";
+import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
+import SetTitle from "../../../components/SetTitle";
+import ErrorMessage from "../../../components/Message/ErrorMessage";
+import LoadingBtn from "../../../components/Buttons/LoadingBtn";
+import SocialLogin from "./SocialLogin";
 
 const Register = () => {
   //! AuthContext

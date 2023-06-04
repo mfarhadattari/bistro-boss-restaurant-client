@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import SectionHeader from "../../../components/SectionHeader";
-import SetTitle from "../../../components/SetTitle";
-import UserItem from "../../../components/UserItem";
-import useSecureAxios from "../../../hooks/useSecureAxios";
-import useAuthContext from "../../../hooks/useAuthContext";
-import SuccessAlert from "../../../components/Message/SuccessAlert";
-import ConfirmationAlert from "./../../../components/Message/ConfirmationAlert";
+import useSecureAxios from "../../hooks/useSecureAxios";
+import useAuthContext from "../../hooks/useAuthContext";
+import ConfirmationAlert from "../../components/Message/ConfirmationAlert";
+import SuccessAlert from "../../components/Message/SuccessAlert";
+import SetTitle from "../../components/SetTitle";
+import SectionHeader from "../../components/SectionHeader";
+import UserItem from "../../components/UserItem";
 
 const AllUsers = () => {
   const { axiosSecure } = useSecureAxios();
@@ -20,18 +20,20 @@ const AllUsers = () => {
   });
 
   const handelMakeAdmin = (user) => {
-    ConfirmationAlert(`Want to make "${user.displayName}" admin?`).then((res) => {
-      if (res.isConfirmed) {
-        axiosSecure
-          .patch(`/users/admin/${user._id}?email=${authUser.email}`)
-          .then(({ data }) => {
-            if (data.modifiedCount > 0) {
-              SuccessAlert(`${user.displayName} is now admin now!`);
-              refetch();
-            }
-          });
+    ConfirmationAlert(`Want to make "${user.displayName}" admin?`).then(
+      (res) => {
+        if (res.isConfirmed) {
+          axiosSecure
+            .patch(`/users/admin/${user._id}?email=${authUser.email}`)
+            .then(({ data }) => {
+              if (data.modifiedCount > 0) {
+                SuccessAlert(`${user.displayName} is now admin now!`);
+                refetch();
+              }
+            });
+        }
       }
-    });
+    );
   };
 
   return (

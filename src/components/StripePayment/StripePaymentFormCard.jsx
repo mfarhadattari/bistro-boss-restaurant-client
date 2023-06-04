@@ -70,7 +70,7 @@ const StripePaymentFormCard = ({ price }) => {
             },
           })
           .then((res) => {
-            if (res.paymentIntent.status === "succeeded") {
+            if (res?.paymentIntent?.status === "succeeded") {
               const paymentInfo = {
                 name: authUser.displayName,
                 email: authUser.email,
@@ -93,7 +93,7 @@ const StripePaymentFormCard = ({ price }) => {
                 .then(({ data }) => {
                   if (
                     data.deleteConfirmation.deletedCount > 0 &&
-                    data.paymentConfirmation.inserterId
+                    data.paymentConfirmation.insertedId
                   ) {
                     SuccessAlert("Payment Successfully");
                   }

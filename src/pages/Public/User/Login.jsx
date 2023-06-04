@@ -1,18 +1,19 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import img from "../../assets/others/authentication.png";
+import img from "../../../assets/others/authentication.png";
 import {
   loadCaptchaEnginge,
   validateCaptcha,
   LoadCanvasTemplate,
 } from "react-simple-captcha";
+import useAuthContext from "../../../hooks/useAuthContext";
+import { useState } from "react";
+import SuccessAlert from "../../../components/Message/SuccessAlert";
+import FirebaseErrorAlert from './../../../components/Message/FirebaseErrorAlert';
+import SetTitle from "../../../components/SetTitle";
+import LoadingBtn from './../../../components/Buttons/LoadingBtn';
+import SocialLogin from './SocialLogin';
+import { useEffect } from "react";
 
-import { useEffect, useState } from "react";
-import SetTitle from "../../components/SetTitle";
-import LoadingBtn from "./../../components/Buttons/LoadingBtn";
-import SocialLogin from "../../components/SocialLogin";
-import useAuthContext from "../../hooks/useAuthContext";
-import SuccessAlert from "../../components/Message/SuccessAlert";
-import FirebaseErrorAlert from "../../components/Message/FirebaseErrorAlert";
 
 const Login = () => {
   const { loginUser } = useAuthContext();

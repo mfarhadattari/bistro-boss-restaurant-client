@@ -1,18 +1,39 @@
 import { FaBars } from "react-icons/fa";
-import NavigationLink from "../../components/NavigationLink";
-import Avatar from "../../components/Avatar";
-import CartIcon from "../../components/CartIcon";
-import Heading from "../../components/Heading";
-import useAuthContext from "../../hooks/useAuthContext";
+import useAuthContext from "../../../hooks/useAuthContext";
+import NavigationLink from "../../../components/NavigationLink";
+import CartIcon from "../../../components/CartIcon";
+import Avatar from "./../../../components/Avatar";
+import Heading from "../../../components/Heading";
+import { useEffect } from "react";
+import useSecureAxios from "./../../../hooks/useSecureAxios";
+import { useState } from "react";
 
 const NavigationBar = () => {
   const { authUser } = useAuthContext();
+  const { axiosSecure } = useSecureAxios();
+  const [isAdmin, setIsAdmin] = useState();
+
+  useEffect(() => {
+    if (authUser) {
+      axiosSecure
+        .get(`/user/admin?email=${authUser.email}`)
+        .then(({ data }) => {
+          console.log(data);
+          setIsAdmin(data.isAdmin);
+        });
+    }
+  }, [axiosSecure, authUser]);
+
   const navOptions = (
     <>
       <NavigationLink to="/">Home</NavigationLink>
       <NavigationLink to="/menu">Menu</NavigationLink>
       <NavigationLink to="/shop">Shop</NavigationLink>
-      <NavigationLink to="/dashboard/">Dashboard</NavigationLink>
+      {isAdmin ? (
+        <NavigationLink to="/dashboard/admin-home">Dashboard</NavigationLink>
+      ) : (
+        <NavigationLink to="/dashboard/user-home">Dashboard</NavigationLink>
+      )}
 
       {authUser ? (
         <>

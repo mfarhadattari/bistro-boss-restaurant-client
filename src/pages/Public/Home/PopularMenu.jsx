@@ -1,9 +1,10 @@
-import SectionHeader from "./../../components/SectionHeader";
-import MenuItem from "../../components/MenuItem";
 import { Link } from "react-router-dom";
-import useMenu from "./../../hooks/useMenu";
-import Loader from "../../components/Loader";
-import MenuBtn from "../../components/Buttons/MenuBtn";
+import Loader from "../../../components/Loader";
+import SectionHeader from "../../../components/SectionHeader";
+import useMenu from "../../../hooks/useMenu";
+import MenuItem from "./../../../components/MenuItem";
+import MenuBtn from "./../../../components/Buttons/MenuBtn";
+
 const PopularMenu = () => {
   const { loading } = useMenu();
   const menu = useMenu().menu.filter(
@@ -25,10 +26,7 @@ const PopularMenu = () => {
             ))}
           </div>
           <div className="w-fit mx-auto mt-10">
-            <Link
-              
-              to="/menu"
-            >
+            <Link to="/menu">
               <MenuBtn>View Full Menu</MenuBtn>
             </Link>
           </div>

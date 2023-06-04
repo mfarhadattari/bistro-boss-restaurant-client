@@ -1,12 +1,13 @@
-import SetTitle from "../../components/SetTitle";
-import Cover from "../../components/cover";
+import coverImg from "../../..//assets/home/chef-service.jpg";
+import SetTitle from "../../../components/SetTitle";
+import Cover from "./../../../components/Cover";
+
 import Banner from "./Banner";
 import Categories from "./Categories";
+import PopularMenu from "./PopularMenu";
 import Contract from "./Contract";
 import Featured from "./Featured";
-import PopularMenu from "./PopularMenu";
 import Testimonials from "./Testimonials";
-import coverImg from "../../assets/home/chef-service.jpg";
 
 const Home = () => {
   return (

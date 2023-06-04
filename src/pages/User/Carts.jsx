@@ -1,8 +1,8 @@
-import SectionHeader from "../../../components/SectionHeader";
-import SetTitle from "../../../components/SetTitle";
-import CartItem from "../../../components/CartItem";
-import useCart from "../../../hooks/useCart";
 import { Link } from "react-router-dom";
+import SectionHeader from "../../components/SectionHeader";
+import SetTitle from "../../components/SetTitle";
+import useCart from "../../hooks/useCart";
+import CartItem from "../../components/CartItem";
 
 const Carts = () => {
   const { carts } = useCart();

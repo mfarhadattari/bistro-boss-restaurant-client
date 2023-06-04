@@ -1,4 +1,4 @@
-import FoodCard from "../../components/foodCard";
+import FoodCard from "./../../../components/FoodCard";
 
 const CategoryTab = ({ items }) => {
   // TODO : PAGINATION

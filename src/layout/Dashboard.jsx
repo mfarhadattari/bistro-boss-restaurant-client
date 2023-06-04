@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import NavigationLink from "./../components/NavigationLink";
 import {
   FaBars,
   FaBook,
@@ -14,9 +13,10 @@ import {
   FaCalendarCheck,
   FaCommentDots,
 } from "react-icons/fa";
-import Heading from "../components/Heading";
 import useAdmin from "../hooks/useAdmin";
-import CartIcon from "./../components/CartIcon";
+import NavigationLink from './../components/NavigationLink';
+import CartIcon from './../components/CartIcon';
+import Heading from './../components/Heading';
 
 const Dashboard = () => {
   const { isAdmin } = useAdmin();

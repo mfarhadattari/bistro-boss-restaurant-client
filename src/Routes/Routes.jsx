@@ -1,19 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../layout/Main";
-import Home from "../pages/Home/Home";
-import Menu from "../pages/Menu/Menu";
-import Shop from "../pages/Shop/Shop";
-import Login from "../pages/User/Login";
-import Register from "../pages/User/Register";
-import Dashboard from "../layout/Dashboard";
 import RouteProtector from "./RouteProtector";
-import UserHome from "../pages/Dashboard/User/UserHome";
-import Carts from "../pages/Dashboard/User/Carts";
-import AllUsers from "../pages/Dashboard/Admin/AllUsers";
 import AdminRoute from "./AdminRoute";
-import AddItems from "../pages/Dashboard/Admin/AddItems";
-import ManageAllItems from "../pages/Dashboard/Admin/ManageAllItems";
-import Payment from "../pages/Dashboard/User/Payment";
+
+import Main from "../layout/Main";
+import Dashboard from "../layout/Dashboard";
+
+import Home from "../pages/Public/Home/Home";
+import Menu from "../pages/Public/Menu/Menu";
+import Shop from "../pages/Public/Shop/Shop";
+import Login from "../pages/Public/User/Login";
+import Register from "../pages/Public/User/Register";
+
+import UserHome from "../pages/User/UserHome";
+import Carts from "../pages/User/Carts";
+import Payment from "../pages/User/Payment";
+
+import AdminHome from "../pages/Admin/AdminHome";
+import AllUsers from "../pages/Admin/AllUsers";
+import AddItems from "../pages/Admin/AddItems";
+import ManageAllItems from "../pages/Admin/ManageAllItems";
 
 const Routes = createBrowserRouter([
   {
@@ -51,7 +56,7 @@ const Routes = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashboard/",
+        path: "user-home",
         element: <UserHome></UserHome>,
       },
       {
@@ -61,6 +66,14 @@ const Routes = createBrowserRouter([
       {
         path: "payment",
         element: <Payment></Payment>,
+      },
+      {
+        path: "admin-home",
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
       },
       {
         path: "all-users",

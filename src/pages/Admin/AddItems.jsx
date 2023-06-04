@@ -1,11 +1,12 @@
-import SetTitle from "./../../../components/SetTitle";
-import SectionHeader from "./../../../components/SectionHeader";
 import { FaUtensils } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import useSecureAxios from "../../../hooks/useSecureAxios";
-import ErrorMessage from "../../../components/Message/ErrorMessage";
-import useAuthContext from "../../../hooks/useAuthContext";
-import SuccessAlert from "../../../components/Message/SuccessAlert";
+import useAuthContext from "../../hooks/useAuthContext";
+import useSecureAxios from "../../hooks/useSecureAxios";
+import SuccessAlert from "../../components/Message/SuccessAlert";
+import SetTitle from "../../components/SetTitle";
+import SectionHeader from "../../components/SectionHeader";
+import ErrorMessage from "../../components/Message/ErrorMessage";
+
 
 const AddItems = () => {
   const { authUser } = useAuthContext();

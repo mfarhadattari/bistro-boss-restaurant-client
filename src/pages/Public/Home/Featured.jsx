@@ -1,5 +1,5 @@
-import SectionHeader from "../../components/SectionHeader";
-import featuredImg from "../../assets/home/featured.jpg";
+import SectionHeader from "../../../components/SectionHeader";
+import featuredImg from "../../../assets/home/featured.jpg";
 import moment from "moment";
 
 const Featured = () => {

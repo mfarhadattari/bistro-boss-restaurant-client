@@ -1,14 +1,14 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-
-import Cover from "../../components/cover";
-import SetTitle from "./../../components/SetTitle";
-import coverBg from "../../assets/shop/banner.jpg";
+import SetTitle from "../../../components/SetTitle";
+import Cover from "../../../components/Cover";
+import Loader from "../../../components/Loader";
 import { useState } from "react";
-import CategoryTab from "./CategoryTab";
-import useMenu from "./../../hooks/useMenu";
-import Loader from "./../../components/Loader";
+import useMenu from "../../../hooks/useMenu";
 
+
+import coverBg from '../../../assets/shop/banner.jpg'
+import CategoryTab from './CategoryTab';
 const Shop = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { menu, loading } = useMenu();

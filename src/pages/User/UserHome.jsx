@@ -1,10 +1,11 @@
-import SetTitle from "../../../components/SetTitle";
+import SetTitle from "../../components/SetTitle";
 
 const UserHome = () => {
+  // TODO: Complete User Home
   return (
     <main>
       <SetTitle title="User Home - Bistro Boss Restaurant"></SetTitle>
-      <h1>This is User Dashboard Home</h1>
+      <h1>This is User Home</h1>
     </main>
   );
 };

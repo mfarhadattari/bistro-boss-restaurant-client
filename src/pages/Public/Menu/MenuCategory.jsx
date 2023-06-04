@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import MenuBtn from "../../components/Buttons/MenuBtn";
-import MenuItem from "../../components/MenuItem";
-import Cover from "../../components/cover";
+import MenuBtn from "../../../components/Buttons/MenuBtn";
+import Cover from "../../../components/Cover";
+import MenuItem from "../../../components/MenuItem";
+
 
 const MenuCategory = ({ menuItems, bgImg, heading, subheading }) => {
   // TODO : Display shop tab according to category from menu page

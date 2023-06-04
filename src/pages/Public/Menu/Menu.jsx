@@ -1,16 +1,16 @@
-import SetTitle from "../../components/SetTitle";
-import Cover from "../../components/cover";
-import banner from "../../assets/menu/banner.jpg";
-import useMenu from "../../hooks/useMenu";
-import Loader from "./../../components/Loader";
+import SetTitle from "../../../components/SetTitle";
+import SectionHeader from "../../../components/SectionHeader";
+import useMenu from "../../../hooks/useMenu";
+import Loader from "../../../components/Loader";
+import Cover from "../../../components/Cover";
 import MenuCategory from "./MenuCategory";
-import SectionHeader from "../../components/SectionHeader";
 
+import banner from "../../../assets/menu/banner.jpg";
 /* --------------------- bg cover ------------------- */
-import dessertBg from "../../assets/menu/dessert-bg.jpeg";
-import pizzaBg from "../../assets/menu/pizza-bg.jpg";
-import saladBg from "../../assets/menu/salad-bg.jpg";
-import soupBg from "../../assets/menu/soup-bg.jpg";
+import dessertBg from "../../../assets/menu/dessert-bg.jpeg";
+import pizzaBg from "../../../assets/menu/pizza-bg.jpg";
+import saladBg from "../../../assets/menu/salad-bg.jpg";
+import soupBg from "../../../assets/menu/soup-bg.jpg";
 
 const Menu = () => {
   const { menu, loading } = useMenu();
