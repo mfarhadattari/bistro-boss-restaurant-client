@@ -10,6 +10,7 @@ import useAuthContext from "../../hooks/useAuthContext";
 import ErrorAlert from "./../Message/ErrorAlert";
 import useCart from "../../hooks/useCart";
 import moment from "moment/moment";
+import SuccessAlert from "./../Message/SuccessAlert";
 
 const StripePaymentFormCard = ({ price }) => {
   const stripe = useStripe();
@@ -70,7 +71,6 @@ const StripePaymentFormCard = ({ price }) => {
           })
           .then((res) => {
             if (res.paymentIntent.status === "succeeded") {
-              // TODO: Integrate to database
               const paymentInfo = {
                 name: authUser.displayName,
                 email: authUser.email,
@@ -91,9 +91,13 @@ const StripePaymentFormCard = ({ price }) => {
               axiosSecure
                 .post("/payment-confirmation", paymentInfo)
                 .then(({ data }) => {
-                  console.log(data);
+                  if (
+                    data.deleteConfirmation.deletedCount > 0 &&
+                    data.paymentConfirmation.inserterId
+                  ) {
+                    SuccessAlert("Payment Successfully");
+                  }
                 });
-              console.log(res.paymentIntent);
             }
             if (res.error) {
               ErrorAlert(res.error.message);
