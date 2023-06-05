@@ -1,16 +1,15 @@
 import { FaUtensils } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import useAuthContext from "../../hooks/useAuthContext";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import SuccessAlert from "../../components/Message/SuccessAlert";
 import SetTitle from "../../components/SetTitle";
 import SectionHeader from "../../components/SectionHeader";
 import ErrorMessage from "../../components/Message/ErrorMessage";
-
+import useAuthContext from "../../hooks/useAuthContext";
 
 const AddItems = () => {
-  const { authUser } = useAuthContext();
   const { axiosSecure } = useSecureAxios();
+  const { authUser } = useAuthContext();
   const {
     register,
     handleSubmit,
@@ -32,13 +31,13 @@ const AddItems = () => {
           const { name, category, price, recipe } = data;
           const newItem = {
             name,
-            category,
+            category: category.toLowerCase(),
             price: parseFloat(price),
             recipe,
             image: imgURL,
           };
           axiosSecure
-            .post(`/add-item?email=${authUser.email}`, newItem)
+            .post(`/admin/add-item?email=${authUser.email}`, newItem)
             .then(({ data }) => {
               if (data.insertedId) {
                 SuccessAlert("Added Item Successfully!");

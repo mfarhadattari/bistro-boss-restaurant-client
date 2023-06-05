@@ -23,7 +23,7 @@ const Dashboard = () => {
 
   const userOption = (
     <>
-      <NavigationLink to="/dashboard/">
+      <NavigationLink to="/dashboard/user-home">
         <span className="flex items-center gap-2 text-lg">
           <FaHome></FaHome> USER HOME
         </span>
@@ -61,7 +61,7 @@ const Dashboard = () => {
 
   const adminOption = (
     <>
-      <NavigationLink to="/dashboard/">
+      <NavigationLink to="/dashboard/admin-home">
         <span className="flex items-center gap-2 text-lg">
           <FaHome></FaHome> ADMIN HOME
         </span>

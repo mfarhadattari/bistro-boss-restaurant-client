@@ -1,30 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
 import useSecureAxios from "../../hooks/useSecureAxios";
-import useAuthContext from "../../hooks/useAuthContext";
 import ConfirmationAlert from "../../components/Message/ConfirmationAlert";
 import SuccessAlert from "../../components/Message/SuccessAlert";
 import SetTitle from "../../components/SetTitle";
 import SectionHeader from "../../components/SectionHeader";
 import UserItem from "../../components/UserItem";
+import useUsers from "../../hooks/useUsers";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const AllUsers = () => {
   const { axiosSecure } = useSecureAxios();
+  const { users, refetch } = useUsers();
   const { authUser } = useAuthContext();
-
-  const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const res = await axiosSecure(`/all-users?email=${authUser.email}`);
-      return res.data;
-    },
-  });
 
   const handelMakeAdmin = (user) => {
     ConfirmationAlert(`Want to make "${user.displayName}" admin?`).then(
       (res) => {
         if (res.isConfirmed) {
           axiosSecure
-            .patch(`/users/admin/${user._id}?email=${authUser.email}`)
+            .patch(`/admin/make-admin/${user._id}?email=${authUser.email}`)
             .then(({ data }) => {
               if (data.modifiedCount > 0) {
                 SuccessAlert(`${user.displayName} is now admin now!`);

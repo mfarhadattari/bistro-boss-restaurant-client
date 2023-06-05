@@ -1,30 +1,11 @@
 import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
-import useCart from "../hooks/useCart";
-import SuccessAlert from "./Message/SuccessAlert";
-import ConfirmationAlert from "./Message/ConfirmationAlert";
 
-const CartItem = ({ cartItem, no }) => {
-  const { refetchCart } = useCart();
+
+const CartItem = ({ cartItem, no , deleteItem}) => {
+  
   const { _id, name, price, quantity, image } = cartItem;
 
-  /* ---------------------------------------------------------------
-  !-------------------------- DELETE ITEM HANDLER ------------- */
-  const deleteItem = (id) => {
-    ConfirmationAlert("Want to remove?").then((res) => {
-      if (res.isConfirmed) {
-        fetch(`https://mfarhad-bistro-boss-restaurant.vercel.app/carts/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
-              SuccessAlert("Delete Item Successfully");
-              refetchCart();
-            }
-          });
-      }
-    });
-  };
+  
 
   return (
     <tr className="text-lg font-semibold">

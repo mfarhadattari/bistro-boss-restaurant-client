@@ -8,7 +8,7 @@ const useAdmin = () => {
   const [adminLoading, setAdminLoading] = useState(true);
 
   useEffect(() => {
-    axiosSecure.get(`/user/admin?email=${authUser?.email}`).then(({ data }) => {
+    axiosSecure.get(`/check-admin?email=${authUser?.email}`).then(({ data }) => {
       setIsAdmin(data.isAdmin);
       setAdminLoading(false);
     });

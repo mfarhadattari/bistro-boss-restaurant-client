@@ -26,16 +26,24 @@ const StripePaymentFormCard = ({ price }) => {
 
   useEffect(() => {
     if (price > 0) {
-      axiosSecure.post("create-payment-intent", { price }).then(({ data }) => {
-        setClientSecret(data.clientSecret);
-      });
+      axiosSecure
+        .post("/user/create-payment-intent", { price })
+        .then(({ data }) => {
+          setClientSecret(data.clientSecret);
+        });
     }
   }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!stripe || !element || !clientSecret || paymentProcessing || price < 1) {
+    if (
+      !stripe ||
+      !element ||
+      !clientSecret ||
+      paymentProcessing ||
+      price < 1
+    ) {
       return;
     }
 
@@ -88,7 +96,7 @@ const StripePaymentFormCard = ({ price }) => {
                 }),
               };
               axiosSecure
-                .post("/payment-confirmation", paymentInfo)
+                .post("/user/payment-confirmation", paymentInfo)
                 .then(({ data }) => {
                   if (
                     data.deleteConfirmation.deletedCount > 0 &&

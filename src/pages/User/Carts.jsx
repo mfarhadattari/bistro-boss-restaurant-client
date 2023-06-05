@@ -3,14 +3,33 @@ import SectionHeader from "../../components/SectionHeader";
 import SetTitle from "../../components/SetTitle";
 import useCart from "../../hooks/useCart";
 import CartItem from "../../components/CartItem";
+import useSecureAxios from "../../hooks/useSecureAxios";
+import ConfirmationAlert from "./../../components/Message/ConfirmationAlert";
+import SuccessAlert from "./../../components/Message/SuccessAlert";
 
 const Carts = () => {
-  const { carts } = useCart();
+  const { carts, refetchCart } = useCart();
+  const { axiosSecure } = useSecureAxios();
 
   const totalPrice = carts.reduce(
     (total, cartItem) => total + cartItem.price * cartItem.quantity,
     0
   );
+
+  /* ---------------------------------------------------------------
+  !-------------------------- DELETE ITEM HANDLER ------------- */
+  const deleteItem = (id) => {
+    ConfirmationAlert("Want to remove?").then((res) => {
+      if (res.isConfirmed) {
+        axiosSecure.delete(`/user/delete-from-carts/${id}`).then(({ data }) => {
+          if (data.deletedCount > 0) {
+            SuccessAlert("Delete Item Successfully");
+            refetchCart();
+          }
+        });
+      }
+    });
+  };
 
   return (
     <main className="px-5">
@@ -61,6 +80,7 @@ const Carts = () => {
                   key={cartItem._id}
                   no={index}
                   cartItem={cartItem}
+                  deleteItem={deleteItem}
                 ></CartItem>
               ))}
             </tbody>

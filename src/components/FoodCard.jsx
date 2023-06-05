@@ -31,7 +31,7 @@ const FoodCard = ({ item }) => {
         price,
         email: authUser.email,
       };
-      fetch("https://mfarhad-bistro-boss-restaurant.vercel.app/carts", {
+      fetch("https://mfarhad-bistro-boss-restaurant.vercel.app/user/add-to-carts", {
         method: "POST",
         headers: {
           "content-type": "application/json",

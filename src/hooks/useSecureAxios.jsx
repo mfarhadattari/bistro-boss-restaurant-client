@@ -14,13 +14,13 @@ const useSecureAxios = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // interceptor added to include user token
-    axiosSecure.interceptors.request.use((config) => {
+    // interceptor added to include user token and email
+    axiosSecure.interceptors.request.use((req) => {
       const token = localStorage.getItem("bistro-boss-token");
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        req.headers.Authorization = `Bearer ${token}`;
       }
-      return config;
+      return req;
     });
 
     // added interceptor to handel response
@@ -37,7 +37,7 @@ const useSecureAxios = () => {
         return Promise.reject(error);
       }
     );
-  }, [logoutUser, axiosSecure, navigate]);
+  }, [logoutUser, navigate]);
 
   return { axiosSecure };
 };

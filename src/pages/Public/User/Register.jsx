@@ -32,7 +32,7 @@ const Register = () => {
     createUser(data.email, data.password)
       .then(({ user }) => {
         updateUserInfo(data.name, data.photoURL);
-        fetch("https://mfarhad-bistro-boss-restaurant.vercel.app/users", {
+        fetch("https://mfarhad-bistro-boss-restaurant.vercel.app/create-users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

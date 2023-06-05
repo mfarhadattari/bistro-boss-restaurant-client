@@ -2,10 +2,10 @@ import ConfirmationAlert from "../../components/Message/ConfirmationAlert";
 import SuccessAlert from "../../components/Message/SuccessAlert";
 import SectionHeader from "../../components/SectionHeader";
 import SetTitle from "../../components/SetTitle";
-import useAuthContext from "../../hooks/useAuthContext";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import useMenu from "./../../hooks/useMenu";
 import ManageItem from "../../components/ManageItem";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const ManageAllItems = () => {
   const { menu, refetch } = useMenu();
@@ -16,7 +16,7 @@ const ManageAllItems = () => {
     ConfirmationAlert("Sure Want to remove?").then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .delete(`/delete-item/${id}?email=${authUser.email}`)
+          .delete(`/admin/delete-item/${id}?email=${authUser.email}`)
           .then(({ data }) => {
             if (data.deletedCount > 0) {
               SuccessAlert("Your file has been deleted.");
