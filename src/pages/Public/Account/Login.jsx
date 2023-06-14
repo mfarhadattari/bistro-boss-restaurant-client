@@ -71,20 +71,20 @@ const Login = () => {
   };
 
   return (
-    <section className="hero min-h-screen bg-authentication-img p-10">
+    <section className="hero min-h-screen bg-authentication-img lg:p-10">
       <SetTitle title="Login - Bistro Boos Restaurant"></SetTitle>
 
-      <div className="hero-content flex-col lg:flex-row bg-authentication-img shadow-login py-5">
+      <div className="hero-content flex-col lg:flex-row bg-authentication-img  shadow-login py-5">
         <div className="text-center lg:text-left w-full">
           <img src={img} alt="" />
         </div>
-        <div className="card w-full">
+        <div className="card w-full mx-auto">
           <h1 className="text-center text-[#151515] text-4xl font-semibold">
             Login
           </h1>
-          <form className="card-body" onSubmit={handelLoginSubmit}>
+          <form className="card-body my-0" onSubmit={handelLoginSubmit}>
             <div className="form-control">
-              <label className="label">
+              <label className="label my-0">
                 <span className="label-text text-[#444444] text-xl font-medium">
                   Email
                 </span>
@@ -94,12 +94,12 @@ const Login = () => {
                 name="email"
                 required
                 placeholder="Type Here"
-                className="input input-bordered"
+                className="input input-bordered my-0"
               />
             </div>
 
             <div className="form-control">
-              <label className="label">
+              <label className="label my-0">
                 <span className="label-text text-[#444444] text-xl font-medium">
                   Password
                 </span>
@@ -109,12 +109,12 @@ const Login = () => {
                 name="password"
                 required
                 placeholder="Enter Your Password"
-                className="input input-bordered"
+                className="input input-bordered my-0"
               />
             </div>
 
             <div className="form-control">
-              <label className="label">
+              <label className="label my-0">
                 <span className="label-text text-[#444444] text-xl font-medium">
                   Verify Captcha
                 </span>
@@ -123,7 +123,7 @@ const Login = () => {
               <input
                 type="text"
                 placeholder="Enter above text"
-                className="input input-bordered"
+                className="input input-bordered my-0"
                 onChange={handelCaptcha}
               />
             </div>

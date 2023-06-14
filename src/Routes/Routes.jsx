@@ -8,8 +8,8 @@ import Dashboard from "../layout/Dashboard";
 import Home from "../pages/Public/Home/Home";
 import Menu from "../pages/Public/Menu/Menu";
 import Shop from "../pages/Public/Shop/Shop";
-import Login from "../pages/Public/User/Login";
-import Register from "../pages/Public/User/Register";
+import Login from "../pages/Public/Account/Login";
+import Register from "../pages/Public/Account/Register";
 
 import UserHome from "../pages/User/UserHome";
 import Carts from "../pages/User/Carts";
